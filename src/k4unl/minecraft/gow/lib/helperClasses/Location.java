@@ -16,6 +16,12 @@ public class Location {
 		z = _z;
 	}
 	
+	public Location(int _x, int _y, int _z, ForgeDirection d, int offset){
+		x = _x + (d.offsetX * offset);
+		y = _y + (d.offsetY * offset);
+		z = _z + (d.offsetZ * offset);
+	}
+	
 	public Block getBlock(IBlockAccess iba){
 		return iba.getBlock(x, y, z);
 	}
