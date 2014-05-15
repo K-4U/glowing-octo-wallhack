@@ -37,8 +37,12 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax vector = new Vector3fMax(0.40F, 0.40F, 0.40F, 0.6F, 0.6F, 0.6F);
 
-		if(teleporter.getBaseDir().equals(ForgeDirection.NORTH)){
-			
+		if(teleporter != null){
+			if(teleporter.getBaseDir() != null){
+				if(teleporter.getBaseDir().equals(ForgeDirection.NORTH)){
+					vector.setZMin(0.0F);
+				}
+			}
 		}
 		RendererHelper.drawColoredCube(vector);
 		
