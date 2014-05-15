@@ -12,7 +12,6 @@ public class BlockPortalBase extends GOWBlockBase {
 
 	@Override
 	protected Class<? extends TileEntity> getTileEntity() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
