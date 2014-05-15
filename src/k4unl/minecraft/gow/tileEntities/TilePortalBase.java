@@ -10,6 +10,10 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TilePortalBase extends TileEntity {
 	private boolean portalFormed;
+	private int portalWidth;
+	private int portalHeight;
+	private ForgeDirection baseDir;
+	private ForgeDirection portalDir;
 	
 	@Override
 	public void updateEntity(){
@@ -28,9 +32,8 @@ public class TilePortalBase extends TileEntity {
 	
 	private boolean checkPortalComplete(){
 		int i = 0;
-		ForgeDirection baseDir = ForgeDirection.NORTH;
-		//Location blockLocation = new Location(xCoord, yCoord, zCoord);
-		int portalWidth = 0;
+		baseDir = ForgeDirection.NORTH;
+		portalWidth = 0;
 		int half = 0;
 		while(i != 2){
 			for(int z = 1; z <= Config.getInt("maxPortalWidth"); z++){
@@ -66,10 +69,10 @@ public class TilePortalBase extends TileEntity {
 		
 		//Now, that is the bottom taken care of. Let's see about the rest!
 		i = 0;
-		ForgeDirection portalDir = baseDir.getRotation(ForgeDirection.UP);
+		portalDir = baseDir.getRotation(ForgeDirection.UP);
 		Location firstLocation = new Location(xCoord, yCoord, zCoord, baseDir, half);
 		Location secondLocation = new Location(xCoord, yCoord, zCoord, baseDir.getOpposite(), half);
-		int portalHeight = 0;
+		portalHeight = 0;
 		while(i != 3){
 			Log.info("Checking for portal with basedir at " + baseDir + " and top at " + portalDir);
 			for(int y = 1; y <= Config.getInt("maxPortalHeight"); y++){
@@ -120,6 +123,21 @@ public class TilePortalBase extends TileEntity {
 	
 	private void validatePortal(){
 		
+		Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
+		if(bottomLeft.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
+			return;
+		}
+		
+		for(int x = 0; x <= portalWidth+1; x++){
+			Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
+			Location topLocation = new Location(handleLocation, portalDir, portalHeight);
+			TileEntity te = handleLocation.getTE(getWorldObj());
+			((TilePortalFrame)te).setPortalBase(this);
+			te = topLocation.getTE(getWorldObj());
+			((TilePortalFrame)te).setPortalBase(this);
+		}
+		
+		portalFormed = true;
 	}
 	
 	private void invalidatePortal(){
