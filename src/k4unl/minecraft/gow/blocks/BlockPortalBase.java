@@ -1,6 +1,7 @@
 package k4unl.minecraft.gow.blocks;
 
 import k4unl.minecraft.gow.lib.config.Names;
+import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.tileentity.TileEntity;
 
 public class BlockPortalBase extends GOWBlockBase {
@@ -12,7 +13,7 @@ public class BlockPortalBase extends GOWBlockBase {
 
 	@Override
 	protected Class<? extends TileEntity> getTileEntity() {
-		return null;
+		return TilePortalBase.class;
 	}
 
 }
