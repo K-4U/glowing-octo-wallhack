@@ -4,7 +4,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TilePortalBase extends TileEntity {
-	
 	private boolean portalFormed;
 	
 	@Override
@@ -12,8 +11,27 @@ public class TilePortalBase extends TileEntity {
 		super.updateEntity();
 		//Every 10 ticks, check for a complete portal.
 		if(getWorldObj().getTotalWorldTime() % 10 == 0){
-			checkPortalComplete();
+			if(checkPortalComplete()){
+				if(portalFormed){
+					validatePortal();
+				}else{
+					invalidatePortal();
+				}
+			}
 		}
+	}
+	
+	public boolean checkPortalComplete(){
+		
+		return false;
+	}
+	
+	public void validatePortal(){
+		
+	}
+	
+	public void invalidatePortal(){
+		
 	}
 	
 	
