@@ -11,7 +11,7 @@ public class Vector3fMax {
 	private float zMin;
 	private float zMax;
 	
-	public Vector3fMax(float _xMin, float _xMax, float _yMin, float _yMax, float _zMin, float _zMax){
+	public Vector3fMax(float _xMin, float _yMin, float _zMin, float _xMax, float _yMax, float _zMax){
 		xMin = _xMin;
 		xMax = _xMax;
 		
