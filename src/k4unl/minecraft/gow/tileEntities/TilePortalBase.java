@@ -1,7 +1,9 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class TilePortalBase extends TileEntity {
 	private boolean portalFormed;
@@ -21,16 +23,24 @@ public class TilePortalBase extends TileEntity {
 		}
 	}
 	
-	public boolean checkPortalComplete(){
-		
+	private boolean checkPortalComplete(){
+		int i = 0;
+		ForgeDirection dir = ForgeDirection.NORTH;
+		Location blockLocation = new Location(xCoord, yCoord, zCoord);
+		while(i != 2){
+			
+			
+			
+			i++;
+		}
 		return false;
 	}
 	
-	public void validatePortal(){
+	private void validatePortal(){
 		
 	}
 	
-	public void invalidatePortal(){
+	private void invalidatePortal(){
 		
 	}
 	
