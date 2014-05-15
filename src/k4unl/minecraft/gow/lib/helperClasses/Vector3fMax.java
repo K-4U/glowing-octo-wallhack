@@ -1,6 +1,5 @@
 package k4unl.minecraft.gow.lib.helperClasses;
 
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class Vector3fMax {
 

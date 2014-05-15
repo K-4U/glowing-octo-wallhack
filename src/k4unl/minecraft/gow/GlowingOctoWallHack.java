@@ -1,6 +1,5 @@
 package k4unl.minecraft.gow;
 
-import net.minecraft.tileentity.TileEntity;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.Log;

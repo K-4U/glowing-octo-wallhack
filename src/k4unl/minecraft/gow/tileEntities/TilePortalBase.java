@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TilePortalBase extends TileEntity {
+public class TilePortalBase extends TileGOWBase {
 	private boolean portalFormed;
 	private int portalWidth;
 	private int portalHeight;

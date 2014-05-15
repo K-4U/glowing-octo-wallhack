@@ -1,13 +1,12 @@
 package k4unl.minecraft.gow.tileEntities;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class TilePortalFrame extends TileEntity{
+public class TilePortalFrame extends TileGOWBase{
 
 	@Override
 	public void updateEntity(){
