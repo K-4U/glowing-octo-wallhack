@@ -6,6 +6,7 @@ import k4unl.minecraft.gow.tileEntities.TilePortalFrame;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -20,7 +21,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 
 	}
 	
-	private void doRender(TilePortalFrame base, double x, double y, double z, float frame){
+	private void doRender(TilePortalFrame myFrame, double x, double y, double z, float frame){
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		
@@ -29,17 +30,56 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
-		renderBase();
+		renderFrame(myFrame);
 		
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		
 	}
 	
-	private void renderBase(){
+	private void renderFrame(TilePortalFrame frame){
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax vector = new Vector3fMax(0.40F, 0.40F, 0.40F, 0.6F, 0.6F, 0.6F);
 		RendererHelper.drawColoredCube(vector);
+		
+		boolean isN = false;
+		boolean isS = false;
+		boolean isU = false;
+		boolean isD = false;
+		boolean isE = false;
+		boolean isW = false;
+		//Yuck
+		if(frame.isConnectedTo(ForgeDirection.NORTH)){
+			Vector3fMax v = new Vector3fMax(0.4F, 0.4F, 0.0F, 0.6F, 0.6F, 0.4F);
+			RendererHelper.drawColoredCube(v);
+			isN = true;
+		}
+		if(frame.isConnectedTo(ForgeDirection.SOUTH)){
+			Vector3fMax v = new Vector3fMax(0.4F, 0.4F, 0.6F, 0.6F, 0.6F, 1.0F);
+			RendererHelper.drawColoredCube(v);	
+		}
+		
+		if(frame.isConnectedTo(ForgeDirection.EAST)){
+			Vector3fMax v = new Vector3fMax(0.6F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
+			RendererHelper.drawColoredCube(v);	
+		}
+		if(frame.isConnectedTo(ForgeDirection.WEST)){
+			Vector3fMax v = new Vector3fMax(0.0F, 0.4F, 0.4F, 0.4F, 0.6F, 0.6F);
+			RendererHelper.drawColoredCube(v);	
+		}
+		
+		if(frame.isConnectedTo(ForgeDirection.UP)){
+			Vector3fMax v = new Vector3fMax(0.4F, 0.6F, 0.4F, 0.6F, 1.0F, 0.6F);
+			RendererHelper.drawColoredCube(v);	
+		}
+		if(frame.isConnectedTo(ForgeDirection.DOWN)){
+			Vector3fMax v = new Vector3fMax(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
+			RendererHelper.drawColoredCube(v);	
+		}
+		
+		boolean isCorner = false;
+		
+		
 		
 		GL11.glEnd();
 	}

@@ -28,6 +28,12 @@ public class Location {
 		z = baseLoc.getZ() + (d.offsetZ * offset);
 	}
 	
+	public Location(int _x, int _y, int _z, ForgeDirection d) {
+		x = _x + d.offsetX;
+		y = _y + d.offsetY;
+		z = _z + d.offsetZ;
+	}
+
 	public Block getBlock(IBlockAccess iba){
 		return iba.getBlock(x, y, z);
 	}
