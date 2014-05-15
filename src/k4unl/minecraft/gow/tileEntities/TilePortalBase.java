@@ -80,17 +80,16 @@ public class TilePortalBase extends TileEntity {
 				}else{
 					break;
 				}
-				if(oLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
-					portalHeight++;
-				}else{
+				if(oLocation.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
 					break;
 				}
 			}
 			
-			if(portalHeight > 0){
+			if(portalHeight > 1){
 				break;
 			}
 			portalDir = portalDir.getRotation(baseDir);
+			portalHeight = 0;
 			i++;
 		}
 		
@@ -114,7 +113,7 @@ public class TilePortalBase extends TileEntity {
 			}
 		}
 		
-		
+		Log.info("Found a portal. It's " + portalWidth + " wide and " + portalHeight + " high in " + baseDir + " with the portal in the " + portalDir);
 		
 		return true;
 	}
