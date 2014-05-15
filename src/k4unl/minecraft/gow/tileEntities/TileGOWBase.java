@@ -10,6 +10,7 @@ public class TileGOWBase extends TileEntity {
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
+		checkRedstonePower();
 	}
 	
 	@Override

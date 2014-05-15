@@ -87,6 +87,6 @@ public class Location {
 	}
 
 	public String print() {
-		return String.format("X: %i\tY: %i\tZ: %i", x, y, z);
+		return String.format("X: " + x + "\tY: " + y + "\tZ: " + z);
 	}
 }

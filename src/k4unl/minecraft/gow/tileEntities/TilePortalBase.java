@@ -1,7 +1,6 @@
 package k4unl.minecraft.gow.tileEntities;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
-import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
@@ -75,7 +74,7 @@ public class TilePortalBase extends TileGOWBase {
 		Location secondLocation = new Location(xCoord, yCoord, zCoord, baseDir.getOpposite(), half);
 		portalHeight = 0;
 		while(i != 3){
-			Log.info("Checking for portal with basedir at " + baseDir + " and top at " + portalDir);
+			//Log.info("Checking for portal with basedir at " + baseDir + " and top at " + portalDir);
 			for(int y = 1; y <= Config.getInt("maxPortalHeight"); y++){
 				Location nLocation = new Location(firstLocation, portalDir, y);
 				Location oLocation = new Location(secondLocation, portalDir, y);
@@ -117,7 +116,7 @@ public class TilePortalBase extends TileGOWBase {
 			}
 		}
 		
-		Log.info("Found a portal. It's " + portalWidth + " wide and " + portalHeight + " high in " + baseDir + " with the portal in the " + portalDir);
+		//Log.info("Found a portal. It's " + portalWidth + " wide and " + portalHeight + " high in " + baseDir + " with the portal in the " + portalDir);
 		
 		return true;
 	}
@@ -177,20 +176,36 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	private void enablePortal(){
-		Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
-		bottomLeft.offset(baseDir.getOpposite(), 1);
-		bottomLeft.offset(portalDir, 1);
-		for(int x = 0; x <= portalWidth-2; x++){
-			Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
-			for(int y = 0; y < portalHeight-1; y++){
-				Location portalLocation = new Location(handleLocation, portalDir, y);
-				Log.info(portalLocation.print());
+		if(baseDir != null){
+			Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
+			bottomLeft.offset(baseDir.getOpposite(), 1);
+			bottomLeft.offset(portalDir, 1);
+			for(int x = 0; x <= portalWidth-2; x++){
+				Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
+				for(int y = 0; y < portalHeight-1; y++){
+					Location portalLocation = new Location(handleLocation, portalDir, y);
+					getWorldObj().setBlock(portalLocation.getX(), portalLocation.getY(), portalLocation.getZ(), GOWBlocks.portalTeleporter);
+					
+					TilePortalTeleporter teleporter = (TilePortalTeleporter)portalLocation.getTE(getWorldObj());
+					teleporter.setRotation(baseDir, portalDir);
+				}
 			}
 		}
 	}
 	
 	private void disablePortal(){
-		
+		if(baseDir != null){
+			Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
+			bottomLeft.offset(baseDir.getOpposite(), 1);
+			bottomLeft.offset(portalDir, 1);
+			for(int x = 0; x <= portalWidth-2; x++){
+				Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
+				for(int y = 0; y < portalHeight-1; y++){
+					Location portalLocation = new Location(handleLocation, portalDir, y);
+					getWorldObj().setBlockToAir(portalLocation.getX(), portalLocation.getY(), portalLocation.getZ());
+				}
+			}
+		}
 	}
 }
 

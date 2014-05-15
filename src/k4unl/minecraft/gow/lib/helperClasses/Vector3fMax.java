@@ -46,5 +46,29 @@ public class Vector3fMax {
 	public float getZMax(){
 		return zMax;
 	}
+	
+	public void setXMin(float _x){
+		xMin = _x;
+	}
+	
+	public void setXMax(float _x){
+		xMax = _x;
+	}
+	
+	public void setYMin(float _y){
+		yMin = _y;
+	}
+	
+	public void setYMax(float _y){
+		yMax = _y;
+	}
+	
+	public void setZMin(float _z){
+		zMin = _z;
+	}
+	
+	public void setZMax(float _z){
+		zMax = _z;
+	}
 }
 

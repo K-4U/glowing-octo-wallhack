@@ -4,6 +4,7 @@ import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -32,9 +33,13 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 		
 	}
 	
-	private void renderTeleporter(TilePortalTeleporter frame){
+	private void renderTeleporter(TilePortalTeleporter teleporter){
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax vector = new Vector3fMax(0.40F, 0.40F, 0.40F, 0.6F, 0.6F, 0.6F);
+
+		if(teleporter.getBaseDir().equals(ForgeDirection.NORTH)){
+			
+		}
 		RendererHelper.drawColoredCube(vector);
 		
 		GL11.glEnd();
