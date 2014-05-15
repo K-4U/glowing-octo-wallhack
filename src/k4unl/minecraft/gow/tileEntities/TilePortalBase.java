@@ -1,5 +1,6 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import k4unl.minecraft.gow.blocks.BlockPortalFrame;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,10 +29,13 @@ public class TilePortalBase extends TileEntity {
 		int i = 0;
 		ForgeDirection dir = ForgeDirection.NORTH;
 		Location blockLocation = new Location(xCoord, yCoord, zCoord);
+		int portalLength = 0;
 		while(i != 2){
 			for(int z = 0; z <= Config.getInt("maxPortalWidth"); z++){
-				
-				
+				Location nLocation = new Location(xCoord, yCoord, zCoord, dir, z);
+				if(nLocation.getBlock(getWorldObj()) instanceof BlockPortalFrame){
+					
+				}
 			}
 			
 			i++;
