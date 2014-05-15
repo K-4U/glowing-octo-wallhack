@@ -69,4 +69,24 @@ public class Location {
 	public int getZ(){
 		return z;
 	}
+	
+	public void addX(int toAdd){
+		x += toAdd;
+	}
+	public void addY(int toAdd){
+		y += toAdd;
+	}
+	public void addZ(int toAdd){
+		z += toAdd;
+	}
+	
+	public void offset(ForgeDirection dir, int offsetInt){
+		x += dir.offsetX * offsetInt;
+		y += dir.offsetY * offsetInt;
+		z += dir.offsetZ * offsetInt;
+	}
+
+	public String print() {
+		return String.format("X: %i\tY: %i\tZ: %i", x, y, z);
+	}
 }

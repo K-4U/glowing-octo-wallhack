@@ -23,9 +23,9 @@ public class TilePortalBase extends TileGOWBase {
 		if(getWorldObj().getTotalWorldTime() % 20 == 0 && !getWorldObj().isRemote){
 			if(checkPortalComplete()){
 				if(portalFormed){
-					validatePortal();
-				}else{
 					invalidatePortal();
+				}else{
+					validatePortal();
 				}
 			}
 		}
@@ -133,9 +133,13 @@ public class TilePortalBase extends TileGOWBase {
 			Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
 			Location topLocation = new Location(handleLocation, portalDir, portalHeight);
 			TileEntity te = handleLocation.getTE(getWorldObj());
-			((TilePortalFrame)te).setPortalBase(this);
+			if(te instanceof TilePortalFrame){
+				((TilePortalFrame)te).setPortalBase(this);
+			}
 			te = topLocation.getTE(getWorldObj());
-			((TilePortalFrame)te).setPortalBase(this);
+			if(te instanceof TilePortalFrame){
+				((TilePortalFrame)te).setPortalBase(this);
+			}
 		}
 		
 		portalFormed = true;
@@ -173,7 +177,16 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	private void enablePortal(){
-		 
+		Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
+		bottomLeft.offset(baseDir.getOpposite(), 1);
+		bottomLeft.offset(portalDir, 1);
+		for(int x = 0; x <= portalWidth-2; x++){
+			Location handleLocation = new Location(bottomLeft, baseDir.getOpposite(), x);
+			for(int y = 0; y < portalHeight-1; y++){
+				Location portalLocation = new Location(handleLocation, portalDir, y);
+				Log.info(portalLocation.print());
+			}
+		}
 	}
 	
 	private void disablePortal(){
