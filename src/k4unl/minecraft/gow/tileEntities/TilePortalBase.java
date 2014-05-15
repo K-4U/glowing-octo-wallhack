@@ -28,17 +28,26 @@ public class TilePortalBase extends TileEntity {
 	private boolean checkPortalComplete(){
 		int i = 0;
 		ForgeDirection dir = ForgeDirection.NORTH;
-		Location blockLocation = new Location(xCoord, yCoord, zCoord);
+		//Location blockLocation = new Location(xCoord, yCoord, zCoord);
 		int portalLength = 0;
 		while(i != 2){
 			for(int z = 0; z <= Config.getInt("maxPortalWidth"); z++){
 				Location nLocation = new Location(xCoord, yCoord, zCoord, dir, z);
 				if(nLocation.getBlock(getWorldObj()) instanceof BlockPortalFrame){
-					
+					portalLength++;
 				}
+			}
+			if(portalLength > 0){
+				//Valid portal found.
+				//Break out of loop
+				break;
 			}
 			
 			i++;
+		}
+		if(portalLength > 0){
+			
+			return true;
 		}
 		return false;
 	}
