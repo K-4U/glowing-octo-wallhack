@@ -1,6 +1,5 @@
 package k4unl.minecraft.gow.tileEntities;
 
-import k4unl.minecraft.gow.blocks.BlockPortalFrame;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
@@ -16,7 +15,7 @@ public class TilePortalBase extends TileEntity {
 	public void updateEntity(){
 		super.updateEntity();
 		//Every 10 ticks, check for a complete portal.
-		if(getWorldObj().getTotalWorldTime() % 20 == 0){
+		if(getWorldObj().getTotalWorldTime() % 20 == 0 && !getWorldObj().isRemote){
 			if(checkPortalComplete()){
 				if(portalFormed){
 					validatePortal();
@@ -29,43 +28,53 @@ public class TilePortalBase extends TileEntity {
 	
 	private boolean checkPortalComplete(){
 		int i = 0;
-		ForgeDirection dir = ForgeDirection.NORTH;
+		ForgeDirection baseDir = ForgeDirection.NORTH;
 		//Location blockLocation = new Location(xCoord, yCoord, zCoord);
-		int portalLength = 0;
-		int portalLength2 = 0;
+		int portalWidth = 0;
+		int half = 0;
 		while(i != 2){
-			for(int z = 0; z <= Config.getInt("maxPortalWidth"); z++){
-				Location nLocation = new Location(xCoord, yCoord, zCoord, dir, z);
-				Location oLocation = new Location(xCoord, yCoord, zCoord, dir.getOpposite(), z);
+			for(int z = 1; z <= Config.getInt("maxPortalWidth"); z++){
+				Location nLocation = new Location(xCoord, yCoord, zCoord, baseDir, z);
+				Location oLocation = new Location(xCoord, yCoord, zCoord, baseDir.getOpposite(), z);
 				if(nLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
-					portalLength++;
+					portalWidth++;
+					half++;
 				}else{
 					break;
 				}
 				if(oLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
-					portalLength2++;
+					portalWidth++;
 				}else{
 					break;
 				}
 			}
-			if(portalLength > 0 && portalLength == portalLength2){
+			if(portalWidth > 0 && portalWidth % 2 == 0){
 				//Valid portal found.
 				//Break out of loop
 				break;
 			}else{
-				portalLength = 0;
-				portalLength2 = 0;
+				portalWidth = 0;
 			}
 			
-			dir = ForgeDirection.EAST;
+			baseDir = ForgeDirection.EAST;
 			i++;
 		}
-		if(portalLength > 0 && portalLength == portalLength2){
-			portalLength += portalLength2;
-			Log.info("Portal found with length " + portalLength);
-			return true;
+		if(portalWidth == 0 || portalWidth % 2 != 0){
+			return false;
 		}
-		return false;
+		
+		
+		//Now, that is the bottom taken care of. Let's see about the rest!
+		i = 0;
+		ForgeDirection portalDir = baseDir.getRotation(ForgeDirection.UP);
+		while(i != 3){
+			Log.info("Checking for portal with basedir at " + baseDir + " and top at " + portalDir);
+			
+			portalDir = portalDir.getRotation(baseDir);
+			i++;
+		}
+		
+		return true;
 	}
 	
 	private void validatePortal(){
