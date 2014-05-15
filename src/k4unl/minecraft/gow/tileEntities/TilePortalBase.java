@@ -67,12 +67,54 @@ public class TilePortalBase extends TileEntity {
 		//Now, that is the bottom taken care of. Let's see about the rest!
 		i = 0;
 		ForgeDirection portalDir = baseDir.getRotation(ForgeDirection.UP);
+		Location firstLocation = new Location(xCoord, yCoord, zCoord, baseDir, half);
+		Location secondLocation = new Location(xCoord, yCoord, zCoord, baseDir.getOpposite(), half);
+		int portalHeight = 0;
 		while(i != 3){
 			Log.info("Checking for portal with basedir at " + baseDir + " and top at " + portalDir);
+			for(int y = 1; y <= Config.getInt("maxPortalHeight"); y++){
+				Location nLocation = new Location(firstLocation, portalDir, y);
+				Location oLocation = new Location(secondLocation, portalDir, y);
+				if(nLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
+					portalHeight++;
+				}else{
+					break;
+				}
+				if(oLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
+					portalHeight++;
+				}else{
+					break;
+				}
+			}
 			
+			if(portalHeight > 0){
+				break;
+			}
 			portalDir = portalDir.getRotation(baseDir);
 			i++;
 		}
+		
+		if(portalHeight == 0){
+			return false;
+		}
+		
+		//Check other side (aka top):
+		Location topCenter = new Location(xCoord, yCoord, zCoord, portalDir, portalHeight);
+		if(topCenter.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
+			return false;
+		}
+		for(int x = 1; x <= half; x++){
+			Location nLocation = new Location(xCoord, yCoord, zCoord, baseDir, x);
+			Location oLocation = new Location(xCoord, yCoord, zCoord, baseDir.getOpposite(), x);
+			if(nLocation.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
+				return false;
+			}
+			if(oLocation.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
+				return false;
+			}
+		}
+		
+		
 		
 		return true;
 	}
@@ -101,3 +143,4 @@ public class TilePortalBase extends TileEntity {
 		super.writeToNBT(tCompound);
 	}
 }
+
