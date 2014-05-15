@@ -10,6 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TilePortalBase extends TileGOWBase {
 	private boolean portalFormed;
+	private boolean portalEnabled;
 	private int portalWidth;
 	private int portalHeight;
 	private ForgeDirection baseDir;
@@ -158,6 +159,25 @@ public class TilePortalBase extends TileGOWBase {
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
+	}
+	
+	@Override
+	protected void redstoneChanged(){
+		if(portalEnabled){
+			portalEnabled = false;
+			disablePortal();
+		}else{
+			portalEnabled = true;
+			enablePortal();
+		}
+	}
+	
+	private void enablePortal(){
+		 
+	}
+	
+	private void disablePortal(){
+		
 	}
 }
 
