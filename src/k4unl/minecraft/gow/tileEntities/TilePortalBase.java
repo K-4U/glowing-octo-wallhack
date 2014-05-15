@@ -1,6 +1,8 @@
 package k4unl.minecraft.gow.tileEntities;
 
 import k4unl.minecraft.gow.blocks.BlockPortalFrame;
+import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,7 +16,7 @@ public class TilePortalBase extends TileEntity {
 	public void updateEntity(){
 		super.updateEntity();
 		//Every 10 ticks, check for a complete portal.
-		if(getWorldObj().getTotalWorldTime() % 10 == 0){
+		if(getWorldObj().getTotalWorldTime() % 20 == 0){
 			if(checkPortalComplete()){
 				if(portalFormed){
 					validatePortal();
@@ -30,23 +32,37 @@ public class TilePortalBase extends TileEntity {
 		ForgeDirection dir = ForgeDirection.NORTH;
 		//Location blockLocation = new Location(xCoord, yCoord, zCoord);
 		int portalLength = 0;
+		int portalLength2 = 0;
 		while(i != 2){
 			for(int z = 0; z <= Config.getInt("maxPortalWidth"); z++){
 				Location nLocation = new Location(xCoord, yCoord, zCoord, dir, z);
-				if(nLocation.getBlock(getWorldObj()) instanceof BlockPortalFrame){
+				Location oLocation = new Location(xCoord, yCoord, zCoord, dir.getOpposite(), z);
+				if(nLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
 					portalLength++;
+				}else{
+					break;
+				}
+				if(oLocation.getBlock(getWorldObj()) == GOWBlocks.portalFrame){
+					portalLength2++;
+				}else{
+					break;
 				}
 			}
-			if(portalLength > 0){
+			if(portalLength > 0 && portalLength == portalLength2){
 				//Valid portal found.
 				//Break out of loop
 				break;
+			}else{
+				portalLength = 0;
+				portalLength2 = 0;
 			}
 			
+			dir = ForgeDirection.EAST;
 			i++;
 		}
-		if(portalLength > 0){
-			
+		if(portalLength > 0 && portalLength == portalLength2){
+			portalLength += portalLength2;
+			Log.info("Portal found with length " + portalLength);
 			return true;
 		}
 		return false;
