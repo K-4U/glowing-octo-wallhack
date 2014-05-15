@@ -3,9 +3,11 @@ package k4unl.minecraft.gow.client.rendering;
 import k4unl.minecraft.gow.lib.config.ModInfo;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalFrame;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
@@ -56,29 +58,36 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		}
 		if(frame.isConnectedTo(ForgeDirection.SOUTH)){
 			Vector3fMax v = new Vector3fMax(0.4F, 0.4F, 0.6F, 0.6F, 0.6F, 1.0F);
-			RendererHelper.drawColoredCube(v);	
+			RendererHelper.drawColoredCube(v);
+			isS = true;
 		}
 		
 		if(frame.isConnectedTo(ForgeDirection.EAST)){
 			Vector3fMax v = new Vector3fMax(0.6F, 0.4F, 0.4F, 1.0F, 0.6F, 0.6F);
-			RendererHelper.drawColoredCube(v);	
+			RendererHelper.drawColoredCube(v);
+			isE = true;
 		}
 		if(frame.isConnectedTo(ForgeDirection.WEST)){
 			Vector3fMax v = new Vector3fMax(0.0F, 0.4F, 0.4F, 0.4F, 0.6F, 0.6F);
-			RendererHelper.drawColoredCube(v);	
+			RendererHelper.drawColoredCube(v);
+			isW = true;
 		}
 		
 		if(frame.isConnectedTo(ForgeDirection.UP)){
 			Vector3fMax v = new Vector3fMax(0.4F, 0.6F, 0.4F, 0.6F, 1.0F, 0.6F);
 			RendererHelper.drawColoredCube(v);	
+			isU = true;
 		}
 		if(frame.isConnectedTo(ForgeDirection.DOWN)){
 			Vector3fMax v = new Vector3fMax(0.4F, 0.0F, 0.4F, 0.6F, 0.6F, 0.6F);
-			RendererHelper.drawColoredCube(v);	
+			RendererHelper.drawColoredCube(v);
+			isD = true;
 		}
 		
-		boolean isCorner = false;
-		
+		boolean isCorner = ((isU || isD) && (isN || isS || isE || isW)) || ((isN || isS) && (isE || isW));
+		if(isCorner){
+			RendererHelper.drawColoredCube(new Vector3fMax(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F));
+		}
 		
 		
 		GL11.glEnd();
