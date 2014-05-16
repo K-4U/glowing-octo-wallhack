@@ -59,4 +59,9 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	public void addCollisionBoxesToList(World w, int x, int y, int z, AxisAlignedBB axigAlignedBB, List arrayList, Entity entity){
 		
 	}
+	
+	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity){
+		
+		
+	}
 }
