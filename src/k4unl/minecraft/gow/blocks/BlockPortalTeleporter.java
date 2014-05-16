@@ -10,6 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -61,7 +62,8 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	}
 	
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity){
-		
-		
+		if(!world.isRemote){
+			entity.setLocationAndAngles(x+10, y+10, z+10, entity.rotationYaw, entity.rotationPitch);
+		}
 	}
 }

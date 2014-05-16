@@ -2,6 +2,7 @@ package k4unl.minecraft.gow.tileEntities;
 
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.network.packets.PacketPortalEnabled;
+import net.minecraft.entity.Entity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 
@@ -31,5 +32,9 @@ public class TilePortalTeleporter extends TileGOWBase {
 	
 	public ForgeDirection getPortalDir(){
 		return portalDir;
+	}
+	
+	public void teleport(Entity ent){
+		
 	}
 }
