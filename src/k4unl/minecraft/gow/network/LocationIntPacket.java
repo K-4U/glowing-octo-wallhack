@@ -7,12 +7,12 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 
 
-public abstract class LocationDoublePacket extends AbstractPacket {
-	protected double x, y, z;
+public abstract class LocationIntPacket extends AbstractPacket {
+	protected int x, y, z;
 	
-	public LocationDoublePacket(){}
+	public LocationIntPacket(){}
 	
-	public LocationDoublePacket(double _x, double _y, double _z){
+	public LocationIntPacket(int _x, int _y, int _z){
 		x = _x;
 		y = _y;
 		z = _z;
@@ -20,16 +20,16 @@ public abstract class LocationDoublePacket extends AbstractPacket {
 	
 	@Override
 	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer){
-		buffer.writeDouble(x);
-		buffer.writeDouble(y);
-		buffer.writeDouble(z);
+		buffer.writeInt(x);
+		buffer.writeInt(y);
+		buffer.writeInt(z);
 	}
 	
 	@Override
 	public void decodeInto(ChannelHandlerContext ctx, ByteBuf buffer){
-		x = buffer.readDouble();
-		y = buffer.readDouble();
-		z = buffer.readDouble();
+		x = buffer.readInt();
+		y = buffer.readInt();
+		z = buffer.readInt();
 	}
 	
 	public NetworkRegistry.TargetPoint getTargetPoint(World world){
