@@ -46,7 +46,6 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		float maxPP = RendererHelper.pixel * (16-6);
 		float maxNP = RendererHelper.pixel * (16-5);
 		GL11.glBegin(GL11.GL_QUADS);
-		Vector3fMax vector = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, maxNP);
 		//RendererHelper.drawColoredCube(vector);
 		
 		boolean isN = false;

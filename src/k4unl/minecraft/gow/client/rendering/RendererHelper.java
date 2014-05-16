@@ -166,10 +166,15 @@ public class RendererHelper {
 		GL11.glColor3f(1.0F, 0.0F, 0.0F);
 		Vector3fMax vEWS = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, minPP);
 		Vector3fMax vEWN = new Vector3fMax(minNP, minNP, maxPP, maxNP, maxNP, maxNP);
+		
+		Vector3fMax vEWT = new Vector3fMax(minNP, maxPP, minPP, maxNP, maxNP, maxPP);
+		Vector3fMax vEWB = new Vector3fMax(minNP, minNP, minPP, maxNP, minPP, maxPP);
+		
 		Vector3fMax vNSW = new Vector3fMax(minNP, minNP, minNP, minPP, maxNP, maxNP);
 		Vector3fMax vNSE = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
-		Vector3fMax vNST = new Vector3fMax(minPP, minNP, minNP, minPP, maxNP, maxNP);
-		Vector3fMax vNSB = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
+		Vector3fMax vNST = new Vector3fMax(minPP, maxPP, minNP, maxPP, maxNP, maxNP);
+		Vector3fMax vNSB = new Vector3fMax(minPP, minNP, minNP, maxPP, minPP, maxNP);
+		
 		
 		Vector3fMax vTBW = new Vector3fMax(minNP, minNP, minNP, minPP, maxNP, maxNP);
 		Vector3fMax vTBE = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
@@ -180,11 +185,17 @@ public class RendererHelper {
 		RendererHelper.renderSide(vEWS, ForgeDirection.WEST);
 		RendererHelper.renderSide(vEWN, ForgeDirection.EAST);
 		RendererHelper.renderSide(vEWN, ForgeDirection.WEST);
-
+		RendererHelper.renderSide(vEWT, ForgeDirection.EAST);
+		RendererHelper.renderSide(vEWT, ForgeDirection.WEST);
+		RendererHelper.renderSide(vEWB, ForgeDirection.EAST);
+		RendererHelper.renderSide(vEWB, ForgeDirection.WEST);
+		
+		
 		RendererHelper.renderSide(vNSW, ForgeDirection.NORTH);
 		RendererHelper.renderSide(vNSW, ForgeDirection.SOUTH);
 		RendererHelper.renderSide(vNSE, ForgeDirection.NORTH);
 		RendererHelper.renderSide(vNSE, ForgeDirection.SOUTH);
+		
 		RendererHelper.renderSide(vNST, ForgeDirection.NORTH);
 		RendererHelper.renderSide(vNST, ForgeDirection.SOUTH);
 		RendererHelper.renderSide(vNSB, ForgeDirection.NORTH);
