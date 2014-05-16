@@ -4,9 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import k4unl.minecraft.gow.network.LocationIntPacket;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class PacketPortalEnabled extends LocationIntPacket {
@@ -36,8 +34,6 @@ public class PacketPortalEnabled extends LocationIntPacket {
 
 	@Override
 	public void handleClientSide(EntityPlayer player) {
-		TileEntity ent =player.worldObj.getTileEntity(x, y, z);
-		Block bl = player.worldObj.getBlock(x, y, z);
 		if(player.worldObj.getTileEntity(x, y, z) instanceof TilePortalTeleporter){
 			((TilePortalTeleporter)player.worldObj.getTileEntity(x, y, z)).setRotation(baseDir, portalDir);
 		}

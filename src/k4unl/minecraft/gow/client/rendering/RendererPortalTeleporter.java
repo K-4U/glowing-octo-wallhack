@@ -26,17 +26,19 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
-		renderTeleporter(myTeleporter);
+		renderTeleporter(myTeleporter, frame);
 		
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		
 	}
 	
-	private void renderTeleporter(TilePortalTeleporter teleporter){
+	private void renderTeleporter(TilePortalTeleporter teleporter, float frame){
+		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBegin(GL11.GL_QUADS);
-		Vector3fMax vector = new Vector3fMax(0.40F, 0.40F, 0.40F, 0.6F, 0.6F, 0.6F);
+		Vector3fMax vector = new Vector3fMax(0.499F, 0.499F, 0.499F, 0.501F, 0.501F, 0.501F);
 
+		
 		if(teleporter != null){
 			if(teleporter.getBaseDir() != null){
 				if(teleporter.getBaseDir().equals(ForgeDirection.NORTH) | teleporter.getPortalDir().equals(ForgeDirection.NORTH)){
@@ -53,7 +55,9 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 				}
 			}
 		}
-		RendererHelper.drawColoredCube(vector);
+		//GL11.glColor3f
+		GL11.glColor4f(0.63671875F, 0.0F, 0.84765625F, frame);
+		RendererHelper.drawWhiteCube(vector);
 		
 		GL11.glEnd();
 	}
