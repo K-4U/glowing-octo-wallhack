@@ -13,14 +13,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 import k4unl.minecraft.gow.lib.config.ModInfo;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.internal.FMLProxyPacket;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @ChannelHandler.Sharable
 public class PacketPipeline extends
@@ -114,5 +119,55 @@ public class PacketPipeline extends
 			
 		});
 	}
+	
+	public static void init(){
+		instance = new PacketPipeline();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	private EntityPlayer getClientPlayer(){
+		return Minecraft.getMinecraft().thePlayer;
+	}
+	
+	public void sendToAll(AbstractPacket message){
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
+		channels.get(Side.SERVER).writeAndFlush(message);
+	}
+	
+	public void sendTo(AbstractPacket message, EntityPlayerMP player){
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.PLAYER);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+		channels.get(Side.SERVER).writeAndFlush(message);
+	}
+	
+	public void sendToAlLAround(LocationIntPacket message, World world, double distance){
+		sendToAllAround(message, message.getTargetPoint(world,distance));
+	}
+	
+	public void sendToAlLAround(LocationIntPacket message, World world){
+		sendToAllAround(message, message.getTargetPoint(world));
+	}
+	
+	public void sendToAlLAround(LocationDoublePacket message, World world){
+		sendToAllAround(message, message.getTargetPoint(world));
+	}
+	
+	public void sendToAllAround(AbstractPacket message, NetworkRegistry.TargetPoint point){
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALLAROUNDPOINT);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(point);
+		channels.get(Side.SERVER).writeAndFlush(message);
+	}
+	
+	public void sendToDimension(AbstractPacket message, int dimensionId){
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.DIMENSION);
+		channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(dimensionId);
+		channels.get(Side.SERVER).writeAndFlush(message);
+	}
+	
+	public void sendToServer(AbstractPacket message){
+		channels.get(Side.CLIENT).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.TOSERVER);
+		channels.get(Side.CLIENT).writeAndFlush(message);
+	}
+	
 
 }
