@@ -43,14 +43,14 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		Vector3fMax pane = new Vector3fMax(0.0F+RendererHelper.pixel, 0.0F, 0.0F+RendererHelper.pixel, 1.0F-RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel);
 		Vector3fMax paneSideEW = new Vector3fMax(0.0F, 0.0F+RendererHelper.pixel, 0.0F+RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel, 1.0F-RendererHelper.pixel);
 		Vector3fMax paneSideNS = new Vector3fMax(0.0F+RendererHelper.pixel, 0.0F+RendererHelper.pixel, 0.0F, 1.0F-RendererHelper.pixel, 1.0F-RendererHelper.pixel, 1.0F);
-		/*RendererHelper.renderSide(pane, ForgeDirection.UP);
+		RendererHelper.renderSide(pane, ForgeDirection.UP);
 		RendererHelper.renderSide(pane, ForgeDirection.DOWN);
 		
 		RendererHelper.renderSide(paneSideEW, ForgeDirection.EAST);
 		RendererHelper.renderSide(paneSideEW, ForgeDirection.WEST);
 		
 		RendererHelper.renderSide(paneSideNS, ForgeDirection.NORTH);
-		RendererHelper.renderSide(paneSideNS, ForgeDirection.SOUTH);*/
+		RendererHelper.renderSide(paneSideNS, ForgeDirection.SOUTH);
 		
 		GL11.glColor3f(1.0F, 0.0F, 0.0F);
 		Vector3fMax paneTB_W = new Vector3fMax(0.0F, 0.0F, 0.0F, RendererHelper.pixel, 1.0F, 1.0F);
@@ -94,7 +94,6 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		RendererHelper.renderSide(paneEW_T, ForgeDirection.WEST);
 		RendererHelper.renderSide(paneEW_D, ForgeDirection.EAST);
 		RendererHelper.renderSide(paneEW_D, ForgeDirection.WEST);
-		
 		
 		GL11.glEnd();
 	}
