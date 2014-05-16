@@ -222,6 +222,9 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		}
 		
 		boolean isCorner = ((isU || isD) && (isN || isS || isE || isW)) || ((isN || isS) && (isE || isW));
+		if(!isU && !isD && !isN && !isS && !isW && !isE && !isW){
+			
+		}
 		if(isCorner){
 			Vector3fMax v = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, maxNP);
 			RendererHelper.drawColoredCube(v);
