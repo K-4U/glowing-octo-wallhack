@@ -176,8 +176,8 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			RendererHelper.renderSide(vEW, ForgeDirection.WEST);
 			
 			GL11.glColor3f(1.0F, 0.0F, 0.0F);
-			Vector3fMax vEWS = new Vector3fMax(maxNP, maxNP, minNP, maxNP, 1.0F, minPP);
-			Vector3fMax vEWN = new Vector3fMax(maxNP, maxNP, minNP, maxNP, 1.0F, minPP);
+			Vector3fMax vEWS = new Vector3fMax(minNP, maxNP, minNP, maxNP, 1.0F, minPP);
+			Vector3fMax vEWN = new Vector3fMax(minNP, maxNP, minNP, maxNP, 1.0F, minPP);
 			Vector3fMax vNSW = new Vector3fMax(minNP, maxNP, minNP, minPP, 1.0F, maxNP);
 			
 			RendererHelper.renderSide(vEWS, ForgeDirection.EAST);
