@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import k4unl.minecraft.gow.lib.config.ModInfo;
+import k4unl.minecraft.gow.network.packets.PacketPortalEnabled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -101,7 +102,7 @@ public class PacketPipeline extends
 	
 	
 	public PacketPipeline(){
-		//registerPacket();
+		registerPacket(PacketPortalEnabled.class);
 		
 		channels = NetworkRegistry.INSTANCE.newChannel(ModInfo.LID, this);
 		
@@ -140,15 +141,15 @@ public class PacketPipeline extends
 		channels.get(Side.SERVER).writeAndFlush(message);
 	}
 	
-	public void sendToAlLAround(LocationIntPacket message, World world, double distance){
+	public void sendToAllAround(LocationIntPacket message, World world, double distance){
 		sendToAllAround(message, message.getTargetPoint(world,distance));
 	}
 	
-	public void sendToAlLAround(LocationIntPacket message, World world){
+	public void sendToAllAround(LocationIntPacket message, World world){
 		sendToAllAround(message, message.getTargetPoint(world));
 	}
 	
-	public void sendToAlLAround(LocationDoublePacket message, World world){
+	public void sendToAllAround(LocationDoublePacket message, World world){
 		sendToAllAround(message, message.getTargetPoint(world));
 	}
 	
