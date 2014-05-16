@@ -207,5 +207,9 @@ public class TilePortalBase extends TileGOWBase {
 			}
 		}
 	}
+	
+	public boolean getIsActive() {
+		return portalEnabled;
+	}
 }
 

@@ -30,14 +30,21 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
-		renderBase();
+		renderBase(base);
 		
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		
 	}
 	
-	private void renderBase(){
+	private void renderBase(TilePortalBase base){
+		float colorFrameR = 1.0F;
+		float colorFrameG = 0.0F;
+		float colorFrameB = 0.0F;
+		if(base.getIsActive()){
+			colorFrameR = 0.0F;
+			colorFrameG = 1.0F;
+		}
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax pane = new Vector3fMax(0.0F+RendererHelper.pixel, 0.0F, 0.0F+RendererHelper.pixel, 1.0F-RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel);
 		Vector3fMax paneSideEW = new Vector3fMax(0.0F, 0.0F+RendererHelper.pixel, 0.0F+RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel, 1.0F-RendererHelper.pixel);
@@ -51,7 +58,7 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		RendererHelper.renderSide(paneSideNS, ForgeDirection.NORTH);
 		RendererHelper.renderSide(paneSideNS, ForgeDirection.SOUTH);
 		
-		GL11.glColor3f(1.0F, 0.0F, 0.0F);
+		GL11.glColor3f(colorFrameR, colorFrameG, colorFrameB);
 		Vector3fMax paneTB_W = new Vector3fMax(0.0F, 0.0F, 0.0F, RendererHelper.pixel, 1.0F, 1.0F);
 		Vector3fMax paneTB_E = new Vector3fMax(1.0F-RendererHelper.pixel, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
 		Vector3fMax paneTB_N = new Vector3fMax(RendererHelper.pixel, 0.0F, 0.0F, 1.0F-RendererHelper.pixel, 1.0F, RendererHelper.pixel);

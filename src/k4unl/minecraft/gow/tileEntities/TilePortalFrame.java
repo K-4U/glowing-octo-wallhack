@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class TilePortalFrame extends TileGOWBase{
 
+	private boolean isActive;
+	
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
@@ -32,14 +34,20 @@ public class TilePortalFrame extends TileGOWBase{
 	@Override
 	public void readFromNBT(NBTTagCompound tCompound){
 		super.readFromNBT(tCompound);
+		isActive = tCompound.getBoolean("isActive");
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
+		tCompound.setBoolean("isActive", isActive);
 	}
 
 	public void setPortalBase(TilePortalBase tilePortalBase) {
 		
+	}
+
+	public boolean getIsActive() {
+		return false;
 	}
 }

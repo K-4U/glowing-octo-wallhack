@@ -35,6 +35,8 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 	
 	private void renderTeleporter(TilePortalTeleporter teleporter, float frame){
 		GL11.glEnable(GL11.GL_BLEND);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GL11.glAlphaFunc(GL11.GL_EQUAL, teleporter.getTransparancy(frame));
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax vector = new Vector3fMax(0.499F, 0.499F, 0.499F, 0.501F, 0.501F, 0.501F);
 
@@ -54,6 +56,7 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 					vector.setXMax(1.0F);
 				}
 			}
+			
 			GL11.glColor4f(0.63671875F, 0.0F, 0.84765625F, teleporter.getTransparancy(frame));
 		}
 		//GL11.glColor3f
@@ -61,6 +64,7 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 		RendererHelper.drawWhiteCube(vector);
 		
 		GL11.glEnd();
+		GL11.glAlphaFunc(GL11.GL_GREATER, 0.1F);
 	}
 
 }
