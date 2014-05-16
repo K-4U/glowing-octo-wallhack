@@ -141,7 +141,7 @@ public class RendererHelper {
 		GL11.glVertex3f(vector.getXMin(), vector.getYMax(), vector.getZMax());
 	}
 	
-	public static void drawCubeWithLines(int size){
+	public static void drawCubeWithLines(int size, boolean isActive){
 		float rF = 0.8F;
 		float gF = 0.8F;
 		float bF = 0.8F;
@@ -163,7 +163,11 @@ public class RendererHelper {
 		RendererHelper.renderSide(vTB, ForgeDirection.UP);
 		RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 		
-		GL11.glColor3f(1.0F, 0.0F, 0.0F);
+		if(!isActive){
+			GL11.glColor3f(1.0F, 0.0F, 0.0F);
+		}else{
+			GL11.glColor3f(0.0F, 1.0F, 0.0F);
+		}
 		Vector3fMax vEWS = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, minPP);
 		Vector3fMax vEWN = new Vector3fMax(minNP, minNP, maxPP, maxNP, maxNP, maxNP);
 		

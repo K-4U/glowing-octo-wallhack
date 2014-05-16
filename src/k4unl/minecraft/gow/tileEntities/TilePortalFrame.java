@@ -1,18 +1,24 @@
 package k4unl.minecraft.gow.tileEntities;
 
 import k4unl.minecraft.gow.lib.helperClasses.Location;
+import k4unl.minecraft.gow.network.PacketPipeline;
+import k4unl.minecraft.gow.network.packets.PacketPortalStateChanged;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class TilePortalFrame extends TileGOWBase{
-
+	private boolean hasSendPacket = true;
 	private boolean isActive;
 	
 	@Override
 	public void updateEntity(){
 		super.updateEntity();
+		if(!getWorldObj().isRemote && hasSendPacket == false){
+			hasSendPacket = true;
+			PacketPipeline.instance.sendToAllAround(new PacketPortalStateChanged(xCoord, yCoord, zCoord, isActive), getWorldObj());
+		}
 	}
 	
 	@Override
@@ -48,6 +54,11 @@ public class TilePortalFrame extends TileGOWBase{
 	}
 
 	public boolean getIsActive() {
-		return false;
+		return isActive;
+	}
+
+	public void setActive(boolean b) {
+		isActive = b;
+		hasSendPacket = false;
 	}
 }

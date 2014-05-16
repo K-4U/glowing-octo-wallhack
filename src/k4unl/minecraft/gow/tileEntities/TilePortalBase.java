@@ -1,5 +1,8 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
@@ -14,6 +17,11 @@ public class TilePortalBase extends TileGOWBase {
 	private int portalHeight;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
+	private List<TilePortalFrame> frames;
+	
+	public TilePortalBase(){
+		frames = new ArrayList<TilePortalFrame>();
+	}
 	
 	@Override
 	public void updateEntity(){
@@ -122,7 +130,7 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	private void validatePortal(){
-		
+		frames.clear();
 		Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
 		if(bottomLeft.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
 			return;
@@ -134,10 +142,12 @@ public class TilePortalBase extends TileGOWBase {
 			TileEntity te = handleLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				frames.add((TilePortalFrame) te);
 			}
 			te = topLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				frames.add((TilePortalFrame) te);
 			}
 		}
 		
@@ -190,6 +200,9 @@ public class TilePortalBase extends TileGOWBase {
 					teleporter.setRotation(baseDir, portalDir);
 				}
 			}
+			for(TilePortalFrame fr : frames){
+				fr.setActive(true);
+			}
 		}
 	}
 	
@@ -204,6 +217,9 @@ public class TilePortalBase extends TileGOWBase {
 					Location portalLocation = new Location(handleLocation, portalDir, y);
 					getWorldObj().setBlockToAir(portalLocation.getX(), portalLocation.getY(), portalLocation.getZ());
 				}
+			}
+			for(TilePortalFrame fr : frames){
+				fr.setActive(false);
 			}
 		}
 	}
