@@ -6,7 +6,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class RendererHelper {
-
+	public static float pixel = 1.0F/16.0F;
+	
 	public static void renderSide(Vector3fMax vector, ForgeDirection dir){
 		//Top side
 		if(dir == ForgeDirection.UP){
