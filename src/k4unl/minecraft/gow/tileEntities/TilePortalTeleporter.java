@@ -29,9 +29,9 @@ public class TilePortalTeleporter extends TileGOWBase {
 		if(getWorldObj().isRemote){
 			prevTransparancy = transparancy;
 			transparancy += directionTransparency;
-			if(transparancy >= 1.0F){
+			if(transparancy >= 0.8F){
 				directionTransparency = -0.01F;
-			}else if(transparancy <= 0.0F){
+			}else if(transparancy <= 0.3F){
 				directionTransparency = 0.01F;
 			}
 		}
