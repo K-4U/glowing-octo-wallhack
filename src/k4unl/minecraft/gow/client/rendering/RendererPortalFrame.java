@@ -44,7 +44,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		float maxNP = RendererHelper.pixel * (16-5);
 		GL11.glBegin(GL11.GL_QUADS);
 		Vector3fMax vector = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, maxNP);
-		RendererHelper.drawColoredCube(vector);
+		//RendererHelper.drawColoredCube(vector);
 		
 		boolean isN = false;
 		boolean isS = false;
@@ -66,10 +66,18 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			GL11.glColor3f(1.0F, 0.0F, 0.0F);
 			Vector3fMax vTBW = new Vector3fMax(minNP, minNP, 0.0F, minPP, maxNP, minNP);
 			Vector3fMax vTBE = new Vector3fMax(maxPP, minNP, 0.0F, maxNP, maxNP, minNP);
+			Vector3fMax vEWB = new Vector3fMax(minNP, minNP, 0.0F, maxNP, minPP, minNP);
+			Vector3fMax vEWT = new Vector3fMax(minNP, maxPP, 0.0F, maxNP, maxNP, minNP);
+			
 			RendererHelper.renderSide(vTBW, ForgeDirection.UP);
 			RendererHelper.renderSide(vTBW, ForgeDirection.DOWN);
 			RendererHelper.renderSide(vTBE, ForgeDirection.UP);
 			RendererHelper.renderSide(vTBE, ForgeDirection.DOWN);
+			
+			RendererHelper.renderSide(vEWT, ForgeDirection.EAST);
+			RendererHelper.renderSide(vEWT, ForgeDirection.WEST);
+			RendererHelper.renderSide(vEWB, ForgeDirection.EAST);
+			RendererHelper.renderSide(vEWB, ForgeDirection.WEST);
 			isN = true;
 		}
 		if(frame.isConnectedTo(ForgeDirection.SOUTH)){
@@ -84,17 +92,26 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			GL11.glColor3f(1.0F, 0.0F, 0.0F);
 			Vector3fMax vTBW = new Vector3fMax(minNP, minNP, maxNP, minPP, maxNP, 1.0F);
 			Vector3fMax vTBE = new Vector3fMax(maxPP, minNP, maxNP, maxNP, maxNP, 1.0F);
+			Vector3fMax vEWB = new Vector3fMax(minNP, minNP, maxNP, maxNP, minPP, 1.0F);
+			Vector3fMax vEWT = new Vector3fMax(minNP, maxPP, maxNP, maxNP, maxNP, 1.0F);
+			
 			RendererHelper.renderSide(vTBW, ForgeDirection.UP);
 			RendererHelper.renderSide(vTBW, ForgeDirection.DOWN);
 			RendererHelper.renderSide(vTBE, ForgeDirection.UP);
 			RendererHelper.renderSide(vTBE, ForgeDirection.DOWN);
+			
+			RendererHelper.renderSide(vEWT, ForgeDirection.EAST);
+			RendererHelper.renderSide(vEWT, ForgeDirection.WEST);
+			RendererHelper.renderSide(vEWB, ForgeDirection.EAST);
+			RendererHelper.renderSide(vEWB, ForgeDirection.WEST);
 			isS = true;
 		}
 		
 		if(frame.isConnectedTo(ForgeDirection.EAST)){
-			Vector3fMax v = new Vector3fMax(0.6F, minNP, minNP, 1.0F, maxNP, maxNP);
+			Vector3fMax vTB = new Vector3fMax(maxNP, minNP, minNP, 1.0F, maxNP, maxNP);
 			GL11.glColor3f(1.0F, 1.0F, 1.0F);
-			RendererHelper.drawColoredCube(v);
+			RendererHelper.renderSide(vTB, ForgeDirection.UP);
+			RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 			isE = true;
 		}
 		if(frame.isConnectedTo(ForgeDirection.WEST)){
