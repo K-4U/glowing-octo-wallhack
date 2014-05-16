@@ -141,23 +141,27 @@ public class RendererHelper {
 		GL11.glVertex3f(vector.getXMin(), vector.getYMax(), vector.getZMax());
 	}
 	
-	public static void drawCubeWithLines(Vector3fMax vector){
+	public static void drawCubeWithLines(int size){
 		float rF = 0.8F;
 		float gF = 0.8F;
 		float bF = 0.8F;
-		float minPP = RendererHelper.pixel * 6;
-		float minNP = RendererHelper.pixel * 5;
-		float maxPP = RendererHelper.pixel * (16-6);
-		float maxNP = RendererHelper.pixel * (16-5);
+		float minPP = RendererHelper.pixel * (size+1);
+		float minNP = RendererHelper.pixel * size;
+		float maxPP = RendererHelper.pixel * (16-(size+1));
+		float maxNP = RendererHelper.pixel * (16-size);
 		
-		Vector3fMax vNS = new Vector3fMax(minPP, minNP, minNP, maxPP, maxNP, maxNP);
-		Vector3fMax vEW = new Vector3fMax(minNP, minNP, minPP, maxNP, maxNP, maxPP);
+		Vector3fMax vNS = new Vector3fMax(minPP, minPP, minPP, maxPP, maxPP, maxNP);
+		Vector3fMax vEW = new Vector3fMax(minNP, minPP, minPP, maxNP, maxPP, maxPP);
+		Vector3fMax vTB = new Vector3fMax(minPP, minNP, minPP, maxPP, maxNP, maxPP);
 		GL11.glColor3f(rF, gF, bF);
 		RendererHelper.renderSide(vNS, ForgeDirection.NORTH);
 		RendererHelper.renderSide(vNS, ForgeDirection.SOUTH);
 		
 		RendererHelper.renderSide(vEW, ForgeDirection.EAST);
 		RendererHelper.renderSide(vEW, ForgeDirection.WEST);
+		
+		RendererHelper.renderSide(vTB, ForgeDirection.UP);
+		RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 		
 		GL11.glColor3f(1.0F, 0.0F, 0.0F);
 		Vector3fMax vEWS = new Vector3fMax(minNP, minNP, minNP, maxNP, maxNP, minPP);
