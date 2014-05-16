@@ -229,10 +229,10 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		
 		boolean isCorner = ((isU || isD) && (isN || isS || isE || isW)) || ((isN || isS) && (isE || isW));
 		if(((!isU && !isD && !isN && !isS && !isW && !isE && !isW) || (isU != isD || isN != isS || isE != isW)) && !isCorner){
-			RendererHelper.drawCubeWithLines(5);
+			RendererHelper.drawCubeWithLines(5, frame.getIsActive());
 		}
 		if(isCorner){
-			RendererHelper.drawCubeWithLines(4);
+			RendererHelper.drawCubeWithLines(4, frame.getIsActive());
 		}
 		
 		if(isU && isD){

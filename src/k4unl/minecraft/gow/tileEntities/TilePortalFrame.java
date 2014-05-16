@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TilePortalFrame extends TileGOWBase{
 	private boolean hasSendPacket = true;
 	private boolean isActive;
+	private TilePortalBase parent;
 	
 	@Override
 	public void updateEntity(){
@@ -50,7 +51,7 @@ public class TilePortalFrame extends TileGOWBase{
 	}
 
 	public void setPortalBase(TilePortalBase tilePortalBase) {
-		
+		parent = tilePortalBase;
 	}
 
 	public boolean getIsActive() {

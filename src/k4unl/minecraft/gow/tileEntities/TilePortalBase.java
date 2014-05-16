@@ -132,6 +132,7 @@ public class TilePortalBase extends TileGOWBase {
 	private void validatePortal(){
 		frames.clear();
 		Location bottomLeft = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
+		Location bottomRight = new Location(xCoord, yCoord, zCoord, baseDir, (portalWidth/2));
 		if(bottomLeft.getBlock(getWorldObj()) != GOWBlocks.portalFrame){
 			return;
 		}
@@ -149,6 +150,11 @@ public class TilePortalBase extends TileGOWBase {
 				((TilePortalFrame)te).setPortalBase(this);
 				frames.add((TilePortalFrame) te);
 			}
+		}
+		for(int y = 0; y <= portalHeight; y++){
+			Location leftLocation = new Location(bottomLeft, portalDir, y);
+			Location rightLocation = new Location(bottomRight, portalDir, y);
+			
 		}
 		
 		portalFormed = true;
