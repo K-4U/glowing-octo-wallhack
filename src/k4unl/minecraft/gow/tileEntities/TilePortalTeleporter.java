@@ -6,14 +6,21 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 
 public class TilePortalTeleporter extends TileGOWBase {
+	private boolean hasSendPacket = true;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
 	
 	public void setRotation(ForgeDirection _baseDir, ForgeDirection _portalDir){
 		baseDir = _baseDir;
 		portalDir = _portalDir;
-		if(!getWorldObj().isRemote){
-			PacketPipeline.instance.sendToAllAround(new PacketPortalEnabled(xCoord, yCoord, zCoord, _baseDir, _portalDir), getWorldObj());
+		hasSendPacket = false;
+	}
+	
+	@Override
+	public void updateEntity(){
+		if(!getWorldObj().isRemote && hasSendPacket == false && baseDir != null){
+			hasSendPacket = true;
+			PacketPipeline.instance.sendToAllAround(new PacketPortalEnabled(xCoord, yCoord, zCoord, baseDir, portalDir), getWorldObj());
 		}
 	}
 	

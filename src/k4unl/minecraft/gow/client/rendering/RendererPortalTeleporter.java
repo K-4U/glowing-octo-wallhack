@@ -39,8 +39,17 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 
 		if(teleporter != null){
 			if(teleporter.getBaseDir() != null){
-				if(teleporter.getBaseDir().equals(ForgeDirection.NORTH)){
+				if(teleporter.getBaseDir().equals(ForgeDirection.NORTH) | teleporter.getPortalDir().equals(ForgeDirection.NORTH)){
 					vector.setZMin(0.0F);
+					vector.setZMax(1.0F);
+				}
+				if(teleporter.getPortalDir().equals(ForgeDirection.UP)){
+					vector.setYMin(0.0F);
+					vector.setYMax(1.0F);
+				}
+				if(teleporter.getBaseDir().equals(ForgeDirection.EAST) || teleporter.getPortalDir().equals(ForgeDirection.EAST)){
+					vector.setXMin(0.0F);
+					vector.setXMax(1.0F);
 				}
 			}
 		}
