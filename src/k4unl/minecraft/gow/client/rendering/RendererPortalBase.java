@@ -51,6 +51,22 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		RendererHelper.renderSide(paneSideNS, ForgeDirection.NORTH);
 		RendererHelper.renderSide(paneSideNS, ForgeDirection.SOUTH);
 		
+		GL11.glColor3f(1.0F, 0.0F, 0.0F);
+		Vector3fMax paneTB_W = new Vector3fMax(0.0F, 0.0F, 0.0F, RendererHelper.pixel, 1.0F, 1.0F);
+		Vector3fMax paneTB_E = new Vector3fMax(1.0F-RendererHelper.pixel, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
+		Vector3fMax paneTB_N = new Vector3fMax(RendererHelper.pixel, 0.0F, 0.0F, 1.0F-RendererHelper.pixel, 1.0F, RendererHelper.pixel);
+		Vector3fMax paneTB_S = new Vector3fMax(RendererHelper.pixel, 0.0F, 0.0F, 1.0F-RendererHelper.pixel, 1.0F, 1.0F);
+		
+		RendererHelper.renderSide(paneTB_W, ForgeDirection.UP);
+		RendererHelper.renderSide(paneTB_W, ForgeDirection.DOWN);
+		RendererHelper.renderSide(paneTB_E, ForgeDirection.UP);
+		RendererHelper.renderSide(paneTB_E, ForgeDirection.DOWN);
+		RendererHelper.renderSide(paneTB_N, ForgeDirection.UP);
+		RendererHelper.renderSide(paneTB_N, ForgeDirection.DOWN);
+		
+		RendererHelper.renderSide(paneTB_S, ForgeDirection.UP);
+		RendererHelper.renderSide(paneTB_S, ForgeDirection.DOWN);
+		
 		GL11.glEnd();
 	}
 
