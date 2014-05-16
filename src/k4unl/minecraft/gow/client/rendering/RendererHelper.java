@@ -150,7 +150,7 @@ public class RendererHelper {
 		float maxPP = RendererHelper.pixel * (16-(size+1));
 		float maxNP = RendererHelper.pixel * (16-size);
 		
-		Vector3fMax vNS = new Vector3fMax(minPP, minPP, minPP, maxPP, maxPP, maxNP);
+		Vector3fMax vNS = new Vector3fMax(minPP, minPP, minNP, maxPP, maxPP, maxNP);
 		Vector3fMax vEW = new Vector3fMax(minNP, minPP, minPP, maxNP, maxPP, maxPP);
 		Vector3fMax vTB = new Vector3fMax(minPP, minNP, minPP, maxPP, maxNP, maxPP);
 		GL11.glColor3f(rF, gF, bF);
@@ -168,6 +168,13 @@ public class RendererHelper {
 		Vector3fMax vEWN = new Vector3fMax(minNP, minNP, maxPP, maxNP, maxNP, maxNP);
 		Vector3fMax vNSW = new Vector3fMax(minNP, minNP, minNP, minPP, maxNP, maxNP);
 		Vector3fMax vNSE = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
+		Vector3fMax vNST = new Vector3fMax(minPP, minNP, minNP, minPP, maxNP, maxNP);
+		Vector3fMax vNSB = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
+		
+		Vector3fMax vTBW = new Vector3fMax(minNP, minNP, minNP, minPP, maxNP, maxNP);
+		Vector3fMax vTBE = new Vector3fMax(maxPP, minNP, minNP, maxNP, maxNP, maxNP);
+		Vector3fMax vTBN = new Vector3fMax(minPP, minNP, minNP, maxPP, maxNP, minPP);
+		Vector3fMax vTBS = new Vector3fMax(minPP, minNP, maxPP, maxPP, maxNP, maxNP);
 		
 		RendererHelper.renderSide(vEWS, ForgeDirection.EAST);
 		RendererHelper.renderSide(vEWS, ForgeDirection.WEST);
@@ -178,6 +185,19 @@ public class RendererHelper {
 		RendererHelper.renderSide(vNSW, ForgeDirection.SOUTH);
 		RendererHelper.renderSide(vNSE, ForgeDirection.NORTH);
 		RendererHelper.renderSide(vNSE, ForgeDirection.SOUTH);
+		RendererHelper.renderSide(vNST, ForgeDirection.NORTH);
+		RendererHelper.renderSide(vNST, ForgeDirection.SOUTH);
+		RendererHelper.renderSide(vNSB, ForgeDirection.NORTH);
+		RendererHelper.renderSide(vNSB, ForgeDirection.SOUTH);
+		
+		RendererHelper.renderSide(vTBW, ForgeDirection.UP);
+		RendererHelper.renderSide(vTBW, ForgeDirection.DOWN);
+		RendererHelper.renderSide(vTBE, ForgeDirection.UP);
+		RendererHelper.renderSide(vTBE, ForgeDirection.DOWN);
+		RendererHelper.renderSide(vTBN, ForgeDirection.UP);
+		RendererHelper.renderSide(vTBN, ForgeDirection.DOWN);
+		RendererHelper.renderSide(vTBS, ForgeDirection.UP);
+		RendererHelper.renderSide(vTBS, ForgeDirection.DOWN);
 	}
 }
 
