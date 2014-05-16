@@ -56,7 +56,7 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 			}
 		}
 		//GL11.glColor3f
-		GL11.glColor4f(0.63671875F, 0.0F, 0.84765625F, frame);
+		GL11.glColor4f(0.63671875F, 0.0F, 0.84765625F, 0.8F);
 		RendererHelper.drawWhiteCube(vector);
 		
 		GL11.glEnd();

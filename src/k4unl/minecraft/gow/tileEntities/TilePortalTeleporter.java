@@ -8,6 +8,9 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class TilePortalTeleporter extends TileGOWBase {
 	private boolean hasSendPacket = true;
+	private float transparancy = 0.2F;
+	private float prevTransparancy = 0.2F;
+	private float directionTransparency = 0.01F;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
 	
@@ -23,6 +26,15 @@ public class TilePortalTeleporter extends TileGOWBase {
 			hasSendPacket = true;
 			PacketPipeline.instance.sendToAllAround(new PacketPortalEnabled(xCoord, yCoord, zCoord, baseDir, portalDir), getWorldObj());
 		}
+		if(getWorldObj().isRemote){
+			prevTransparancy = transparancy;
+			transparancy += directionTransparency;
+			if(transparancy >= 1.0F){
+				directionTransparency = -0.01F;
+			}else if(transparancy <= 0.0F){
+				directionTransparency = 0.01F;
+			}
+		}
 	}
 	
 	
@@ -36,5 +48,9 @@ public class TilePortalTeleporter extends TileGOWBase {
 	
 	public void teleport(Entity ent){
 		
+	}
+
+	public float getTransparancy(float frame) {
+		return transparancy + ((prevTransparancy - transparancy) * frame);
 	}
 }
