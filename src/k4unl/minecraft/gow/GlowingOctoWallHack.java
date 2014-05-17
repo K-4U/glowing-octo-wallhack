@@ -2,6 +2,7 @@ package k4unl.minecraft.gow;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.CustomTabs;
+import k4unl.minecraft.gow.lib.IPs;
 import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.ModInfo;
 import k4unl.minecraft.gow.network.PacketPipeline;
@@ -27,6 +28,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class GlowingOctoWallHack {
 	@Instance(value=ModInfo.ID)
 	public static GlowingOctoWallHack instance;
+	
+	public static IPs ipList = new IPs();
 	
 	@SidedProxy(
 			clientSide = ModInfo.PROXY_LOCATION + ".ClientProxy",

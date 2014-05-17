@@ -3,6 +3,7 @@ package k4unl.minecraft.gow.tileEntities;
 import java.util.ArrayList;
 import java.util.List;
 
+import k4unl.minecraft.gow.GlowingOctoWallHack;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
@@ -23,6 +24,9 @@ public class TilePortalBase extends TileGOWBase {
 	
 	public TilePortalBase(){
 		frames = new ArrayList<Location>();
+		
+		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
+		Log.info("Initialized new portal with IP" + IP);
 	}
 	
 	@Override
