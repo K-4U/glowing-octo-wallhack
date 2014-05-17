@@ -301,6 +301,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 					
 					TilePortalTeleporter teleporter = (TilePortalTeleporter)portalLocation.getTE(getWorldObj());
 					teleporter.setRotation(baseDir, portalDir);
+					teleporter.setBase(this);
 				}
 			}
 			for(Location fr : frames){

@@ -85,4 +85,8 @@ public class TilePortalTeleporter extends TileGOWBase {
 	public float getTransparancy(float frame) {
 		return transparancy + ((prevTransparancy - transparancy) * frame);
 	}
+
+	public void setBase(TilePortalBase tilePortalBase) {
+		portalBase = new Location(tilePortalBase.xCoord, tilePortalBase.yCoord, tilePortalBase.zCoord);
+	}
 }

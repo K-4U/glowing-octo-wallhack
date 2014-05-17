@@ -5,6 +5,7 @@ import java.util.List;
 import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.config.Names;
+import k4unl.minecraft.gow.lib.helperClasses.Location;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.entity.Entity;
@@ -71,12 +72,18 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			long minus = world.getTotalWorldTime() - lastInPortal;
 			Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
-				if(entity instanceof EntityPlayer){
-					((EntityPlayer)entity).setPositionAndUpdate(x+10, y+10, z+10);	
-				}else{
-					entity.setLocationAndAngles(x+10, y+10, z+10, entity.rotationYaw, entity.rotationPitch);
+				Location teLocation = new Location(x,y,z);
+				TilePortalTeleporter teleporter = (TilePortalTeleporter)teLocation.getTE(world);
+				Location teleportLocation = teleporter.getPortalBase().getTarget();
+				
+				if(teleportLocation != null){
+					if(entity instanceof EntityPlayer){
+						((EntityPlayer)entity).setPositionAndUpdate(teleportLocation.getX(), teleportLocation.getY(), teleportLocation.getZ());	
+					}else{
+						entity.setLocationAndAngles(teleportLocation.getX(), teleportLocation.getY(), teleportLocation.getZ(), entity.rotationYaw, entity.rotationPitch);
+					}
+					entCompound.setLong("lastInPortal", world.getTotalWorldTime());
 				}
-				entCompound.setLong("lastInPortal", world.getTotalWorldTime());
 			}
 		}
 	}
