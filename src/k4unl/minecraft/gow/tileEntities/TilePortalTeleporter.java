@@ -1,5 +1,6 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import k4unl.minecraft.gow.lib.helperClasses.Location;
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.network.packets.PacketPortalEnabled;
 import net.minecraft.entity.Entity;
@@ -14,6 +15,7 @@ public class TilePortalTeleporter extends TileGOWBase {
 	private float directionTransparency = 0.01F;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
+	private Location portalBase;
 	
 	@Override
 	public void readFromNBT(NBTTagCompound tCompound){
@@ -22,6 +24,7 @@ public class TilePortalTeleporter extends TileGOWBase {
 		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
 		
+		portalBase = new Location(tCompound.getIntArray("portalBase"));
 	}
 	
 	@Override
@@ -30,12 +33,23 @@ public class TilePortalTeleporter extends TileGOWBase {
 		tCompound.setInteger("baseDir", baseDir.ordinal());
 		tCompound.setInteger("portalDir", portalDir.ordinal());
 		
+		if(portalBase != null){
+			tCompound.setIntArray("portalBase", portalBase.getIntArray());
+		}
 	}
 	
 	public void setRotation(ForgeDirection _baseDir, ForgeDirection _portalDir){
 		baseDir = _baseDir;
 		portalDir = _portalDir;
 		hasSendPacket = false;
+	}
+	
+	public TilePortalBase getPortalBase(){
+		if(portalBase == null){
+			return null;
+		}else{
+			return (TilePortalBase) portalBase.getTE(getWorldObj());
+		}
 	}
 	
 	@Override

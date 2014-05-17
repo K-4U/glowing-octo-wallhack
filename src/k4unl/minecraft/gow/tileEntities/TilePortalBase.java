@@ -37,7 +37,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 			GlowingOctoWallHack.ipList.removeIP(ip);
 		}
 		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
-		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP));
+		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord));
 		ip = IPs.ipToLong(IP);
 		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
@@ -106,7 +106,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}
 		if(linkingCard != null){
 			NBTTagCompound linkCardNBT = linkingCard.writeToNBT(new NBTTagCompound());
-			tCompound.setTag("linkinCard", linkCardNBT);
+			tCompound.setTag("linkingCard", linkCardNBT);
 		}
 		
 		tCompound.setLong("ip", ip);
@@ -405,6 +405,16 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 
 	public boolean getIsValid() {
 		return portalFormed;
+	}
+	
+	public Location getTarget(){
+		//First: see if there's an item in the inventory:
+		if(linkingCard == null) return null;
+		//Next, see if it linked:
+		if(linkingCard.getTagCompound() == null) return null;
+		if(linkingCard.getTagCompound().getLong("linked") == 0) return null;
+		long linked = linkingCard.getTagCompound().getLong("linked");
+		return GlowingOctoWallHack.ipList.getLocation(linked);
 	}
 }
 

@@ -30,7 +30,9 @@ public class GOWItemBase extends Item {
 	}
 	
 	public void setEffect(ItemStack itemStack, boolean _hasEffect){
-		itemStack.getTagCompound().setBoolean("hasEffect", _hasEffect);
+		NBTTagCompound stackCompound = itemStack.getTagCompound();
+		stackCompound.setBoolean("hasEffect", _hasEffect);
+		itemStack.setTagCompound(stackCompound);
 	}
 	
 	@Override
@@ -38,6 +40,7 @@ public class GOWItemBase extends Item {
 		if(itemStack.getTagCompound() == null){
 			itemStack.setTagCompound(new NBTTagCompound());
 		}
+		
 		return hasEffect || itemStack.getTagCompound().getBoolean("hasEffect");
 	}
 	

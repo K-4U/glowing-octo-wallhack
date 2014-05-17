@@ -1,24 +1,26 @@
 package k4unl.minecraft.gow.lib;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+
+import k4unl.minecraft.gow.lib.helperClasses.Location;
 
 public class IPs {
 	private Random rnd;
-	private List<Long> registeredIps;
+	private Map<Long, Location> registeredIps;
 	
 	public IPs(){
-		registeredIps = new ArrayList<Long>();
+		registeredIps = new HashMap<Long, Location>();
 		rnd = new Random(System.currentTimeMillis()/1000);
 	}
 	
 	public boolean IPExists(long ip){
-		return registeredIps.contains(ip);
+		return registeredIps.containsKey(ip);
 	}
 	
-	public void registerIP(long ip){
-		registeredIps.add(ip);
+	public void registerIP(long ip, Location loc){
+		registeredIps.put(ip, loc);
 	}
 	
 	public void removeIP(long ip){
@@ -61,5 +63,9 @@ public class IPs {
 			IP >>= 8;
 		}
 		return sb.toString();
+	}
+
+	public Location getLocation(long linked) {
+		return registeredIps.get(linked);
 	}
 }
