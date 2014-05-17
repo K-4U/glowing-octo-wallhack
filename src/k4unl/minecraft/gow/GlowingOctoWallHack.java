@@ -1,6 +1,7 @@
 package k4unl.minecraft.gow;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.client.gui.GuiHandler;
 import k4unl.minecraft.gow.items.GOWItems;
 import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.IPs;
@@ -16,6 +17,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 
 
@@ -56,6 +58,8 @@ public class GlowingOctoWallHack {
 		proxy.init();
 		proxy.initRenderers();
 		proxy.initSounds();
+		
+		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 	}
 	
 	

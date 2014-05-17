@@ -32,7 +32,7 @@ public class ContainerPortalBase extends Container {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
-		return false;
+		return true;
 	}
 	
 	

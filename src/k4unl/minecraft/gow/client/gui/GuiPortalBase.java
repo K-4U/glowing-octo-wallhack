@@ -1,19 +1,21 @@
 package k4unl.minecraft.gow.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.containers.ContainerPortalBase;
 import k4unl.minecraft.gow.lib.config.ModInfo;
+import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
+import org.lwjgl.opengl.GL11;
 
 public class GuiPortalBase extends GuiContainer {
 
-	protected ResourceLocation resLoc = new ResourceLocation(ModInfo.LID, "textures/gui/portalBase.fw.png");
+	protected static final ResourceLocation resLoc = new ResourceLocation(ModInfo.LID, "textures/gui/portalBase.png");
 	
-	public GuiPortalBase(Container par1Container) {
-		super(par1Container);
+	public GuiPortalBase(InventoryPlayer invPlayer, TilePortalBase _base) {
+		super(new ContainerPortalBase(invPlayer, _base));
 
 	}
 
