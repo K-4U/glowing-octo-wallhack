@@ -24,11 +24,16 @@ public class GuiPortalBase extends GuiContainer {
 			int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.renderEngine.bindTexture(resLoc);
+		
+		int x = (width - xSize) / 2;
+		int y = (height - ySize) / 2;
+		
+		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 	}
 	
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-		drawHorizontalAlignedString(7,3,xSize-14, GOWBlocks.portalBase.getLocalizedName(), true);
+		drawHorizontalAlignedString(7,5,xSize-14, GOWBlocks.portalBase.getLocalizedName(), true);
 	}
 
 	public void drawHorizontalAlignedString(int xOffset, int yOffset, int w, String text, boolean useShadow){
