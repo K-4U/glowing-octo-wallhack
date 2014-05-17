@@ -56,7 +56,7 @@ public class TilePortalBase extends TileGOWBase {
 			list.setIntArray("" + i, fr.getIntArray());
 			i++;
 		}
-		list.setInteger("max", i-1);
+		list.setInteger("max", frames.size());
 		
 		tCompound.setTag("portalFrames", list);
 	}
