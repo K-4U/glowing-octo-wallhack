@@ -34,7 +34,7 @@ public class IPs {
 			IP[3] = rnd.nextInt(253) + 1 + "";
 			
 			fullIP = IP[0] + "." + IP[1] + "." + IP[2] + "." + IP[3];
-			redo = !IPExists(ipToLong(fullIP));
+			redo = IPExists(ipToLong(fullIP));
 		}
 		return fullIP;
 	}
