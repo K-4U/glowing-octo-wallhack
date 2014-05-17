@@ -4,7 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileGOWBase extends TileEntity {
-	private boolean isRedstonePowered;
+	protected boolean isRedstonePowered;
 	
 	
 	@Override

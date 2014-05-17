@@ -3,6 +3,7 @@ package k4unl.minecraft.gow.tileEntities;
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.network.packets.PacketPortalEnabled;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 
@@ -13,6 +14,23 @@ public class TilePortalTeleporter extends TileGOWBase {
 	private float directionTransparency = 0.01F;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
+	
+	@Override
+	public void readFromNBT(NBTTagCompound tCompound){
+		super.readFromNBT(tCompound);
+		
+		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
+		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
+		
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tCompound){
+		super.writeToNBT(tCompound);
+		tCompound.setInteger("baseDir", baseDir.ordinal());
+		tCompound.setInteger("portalDir", portalDir.ordinal());
+		
+	}
 	
 	public void setRotation(ForgeDirection _baseDir, ForgeDirection _portalDir){
 		baseDir = _baseDir;

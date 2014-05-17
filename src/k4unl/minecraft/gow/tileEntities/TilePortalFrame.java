@@ -61,6 +61,7 @@ public class TilePortalFrame extends TileGOWBase{
 	public void setActive(boolean b) {
 		isActive = b;
 		hasSendPacket = false;
+		markDirty();
 	}
 
 	public Location getBlockLocation() {

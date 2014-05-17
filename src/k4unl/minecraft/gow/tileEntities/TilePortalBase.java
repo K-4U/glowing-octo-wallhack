@@ -39,6 +39,7 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	private void readFramesFromNBT(NBTTagCompound tCompound){
+		frames.clear();
 		NBTTagCompound list = tCompound.getCompoundTag("portalFrames");
 		int i = 0;
 		for(i = 0; i <= list.getInteger("max"); i++){
@@ -236,13 +237,15 @@ public class TilePortalBase extends TileGOWBase {
 	
 	@Override
 	protected void redstoneChanged(){
-		if(portalEnabled){
+		
+		if(portalEnabled && !isRedstonePowered){
 			portalEnabled = false;
 			disablePortal();
-		}else{
+		}else if(isRedstonePowered){
 			portalEnabled = true;
 			enablePortal();
 		}
+		markDirty();
 	}
 	
 	private void enablePortal(){
@@ -264,7 +267,6 @@ public class TilePortalBase extends TileGOWBase {
 				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
 			}
 		}
-		markDirty();
 	}
 	
 	private void disablePortal(){
@@ -282,7 +284,6 @@ public class TilePortalBase extends TileGOWBase {
 			for(Location fr : frames){
 				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(false);
 			}
-			markDirty();
 		}
 	}
 	
