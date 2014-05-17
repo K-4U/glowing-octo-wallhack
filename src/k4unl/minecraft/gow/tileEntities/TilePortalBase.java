@@ -19,6 +19,7 @@ public class TilePortalBase extends TileGOWBase {
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
 	private List<Location> frames;
+	private long ip;
 	
 	public TilePortalBase(){
 		frames = new ArrayList<Location>();

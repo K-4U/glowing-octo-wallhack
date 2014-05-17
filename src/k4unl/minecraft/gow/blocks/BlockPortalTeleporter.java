@@ -2,6 +2,8 @@ package k4unl.minecraft.gow.blocks;
 
 import java.util.List;
 
+import k4unl.minecraft.gow.lib.Log;
+import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
@@ -64,14 +66,18 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity){
 		if(!world.isRemote){
-			if(entity instanceof EntityPlayer){
-				((EntityPlayer)entity).setPositionAndUpdate(x+10, y+10, z+10);	
-			}else{
-				entity.setLocationAndAngles(x+10, y+10, z+10, entity.rotationYaw, entity.rotationPitch);
-			}
 			NBTTagCompound entCompound = entity.getEntityData();
-			
-			
+			long lastInPortal = entCompound.getLong("lastInPortal");
+			long minus = world.getTotalWorldTime() - lastInPortal;
+			Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
+			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
+				if(entity instanceof EntityPlayer){
+					((EntityPlayer)entity).setPositionAndUpdate(x+10, y+10, z+10);	
+				}else{
+					entity.setLocationAndAngles(x+10, y+10, z+10, entity.rotationYaw, entity.rotationPitch);
+				}
+				entCompound.setLong("lastInPortal", world.getTotalWorldTime());
+			}
 		}
 	}
 }
