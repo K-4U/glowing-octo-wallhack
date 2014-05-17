@@ -62,4 +62,8 @@ public class TilePortalFrame extends TileGOWBase{
 		isActive = b;
 		hasSendPacket = false;
 	}
+
+	public Location getBlockLocation() {
+		return new Location(xCoord, yCoord, zCoord);
+	}
 }

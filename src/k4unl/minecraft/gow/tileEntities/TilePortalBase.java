@@ -1,5 +1,7 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import gnu.trove.list.array.TCharArrayList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,13 +36,28 @@ public class TilePortalBase extends TileGOWBase {
 		
 		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
+		
+	}
+	
+	private void readFramesFromNBT(NBTTagCompound tCompound){
+		NBTTagCompound list = tCompound.getCompoundTag("portalFrames");
+		int i = 0;
+		for(i = 0; i <= list.getInteger("max"); i++){
+			Location frameLocation = new Location(list.getIntArray(""+i));
+			
+			//list.setIntArray("" + i, fr.getBlockLocation().getIntArray());
+			i++;
+		}
 	}
 	
 	private void writeFramesToNBT(NBTTagCompound tCompound){
 		NBTTagCompound list = new NBTTagCompound();
+		int i = 0;
 		for(TilePortalFrame fr : frames){
-			
+			list.setIntArray("" + i, fr.getBlockLocation().getIntArray());
+			i++;
 		}
+		tCompound.setInteger("max", i-1);
 		
 		tCompound.setTag("portalFrames", list);
 	}
