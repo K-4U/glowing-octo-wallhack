@@ -4,13 +4,12 @@ import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class ItemIPHolder extends GOWItemBase {
+public class ItemIPCard extends GOWItemBase {
 
-	public ItemIPHolder() {
+	public ItemIPCard() {
 		super(Names.itemIPCard);
 	}
 	
@@ -19,8 +18,10 @@ public class ItemIPHolder extends GOWItemBase {
 		if(!world.isRemote){
 			TileEntity ent = world.getTileEntity(x, y, z);
 			if(ent instanceof TilePortalBase){
-				NBTTagCompound itemCompound = itemStack.getTagCompound();
+				((ItemIPCard)GOWItems.itemIPCard).setDefaultInfo(itemStack, "Linked to: " + ((TilePortalBase)ent).getIPString());
 				
+				itemStack.getTagCompound().setLong("linked", ((TilePortalBase)ent).getIPLong());
+				((ItemIPCard)GOWItems.itemIPCard).setEffect(itemStack, true);
 			}
 		}
 		

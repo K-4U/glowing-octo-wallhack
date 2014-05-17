@@ -39,7 +39,7 @@ public class IPs {
 		return fullIP;
 	}
 	
-	public long ipToLong(String IP){
+	public static long ipToLong(String IP){
 		long result = 0;
 		String[] pieces = IP.split("\\.");
 		
@@ -50,7 +50,7 @@ public class IPs {
 		return result & 0xFFFFFFFF;
 	}
 	
-	public String longToIp(long IP){
+	public static String longToIp(long IP){
 		StringBuilder sb = new StringBuilder(15);
 		for(int i = 0; i < 4; i++){
 			sb.insert(0, Long.toString(IP & 0xFF));

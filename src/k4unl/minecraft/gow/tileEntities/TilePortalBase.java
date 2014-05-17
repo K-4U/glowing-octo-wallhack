@@ -5,6 +5,7 @@ import java.util.List;
 
 import k4unl.minecraft.gow.GlowingOctoWallHack;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.lib.IPs;
 import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
@@ -27,6 +28,8 @@ public class TilePortalBase extends TileGOWBase {
 		
 		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
 		Log.info("Initialized new portal with IP" + IP);
+		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP));
+		ip = IPs.ipToLong(IP);
 	}
 	
 	@Override
@@ -305,6 +308,14 @@ public class TilePortalBase extends TileGOWBase {
 	
 	public boolean getIsActive() {
 		return portalEnabled;
+	}
+
+	public String getIPString() {
+		return IPs.longToIp(ip);
+	}
+	
+	public Long getIPLong() {
+		return ip;
 	}
 }
 
