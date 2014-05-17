@@ -33,8 +33,8 @@ public class BlockPortalBase extends GOWBlockRendering {
 			return false;
 		}
 		
-		if(player.getItemInUse() != null){
-			if(player.getItemInUse().getItem() instanceof ItemIPCard){
+		if(player.getCurrentEquippedItem() != null){
+			if(player.getCurrentEquippedItem().getItem() instanceof ItemIPCard){
 				return false;
 			}
 		}

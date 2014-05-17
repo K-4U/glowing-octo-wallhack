@@ -337,6 +337,9 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	}
 
 	public String getIPString() {
+		if(ip == 0 && !getWorldObj().isRemote){
+			genNewIP();
+		}
 		return IPs.longToIp(ip);
 	}
 	

@@ -29,10 +29,11 @@ public class ItemIPCard extends GOWItemBase {
 				((ItemIPCard)GOWItems.itemIPCard).setEffect(itemStack, true);
 				
 				itemStack.setTagCompound(stackCompound);
+				return true;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
