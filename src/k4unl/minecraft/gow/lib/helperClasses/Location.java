@@ -16,6 +16,12 @@ public class Location {
 		z = _z;
 	}
 	
+	public Location(int[] loc){
+		x = loc[0];
+		y = loc[1];
+		z = loc[2];
+	}
+	
 	public Location(int _x, int _y, int _z, ForgeDirection d, int offset){
 		x = _x + (d.offsetX * offset);
 		y = _y + (d.offsetY * offset);
@@ -88,5 +94,9 @@ public class Location {
 
 	public String print() {
 		return String.format("X: " + x + "\tY: " + y + "\tZ: " + z);
+	}
+	
+	public int[] getIntArray(){
+		return new int[] {x, y, z};
 	}
 }

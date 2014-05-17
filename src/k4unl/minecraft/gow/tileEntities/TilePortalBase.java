@@ -37,9 +37,12 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	private void writeFramesToNBT(NBTTagCompound tCompound){
+		NBTTagCompound list = new NBTTagCompound();
 		for(TilePortalFrame fr : frames){
 			
 		}
+		
+		tCompound.setTag("portalFrames", list);
 	}
 	
 	@Override
