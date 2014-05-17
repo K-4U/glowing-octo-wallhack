@@ -142,9 +142,9 @@ public class RendererHelper {
 	}
 	
 	public static void drawCubeWithLines(int size, boolean isActive){
-		float rF = 0.8F;
-		float gF = 0.8F;
-		float bF = 0.8F;
+		float rF = 1.0F;
+		float gF = 1.0F;
+		float bF = 1.0F;
 		float minPP = RendererHelper.pixel * (size+1);
 		float minNP = RendererHelper.pixel * size;
 		float maxPP = RendererHelper.pixel * (16-(size+1));

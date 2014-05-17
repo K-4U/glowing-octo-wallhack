@@ -2,7 +2,6 @@ package k4unl.minecraft.gow.blocks;
 
 import java.util.List;
 
-import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
@@ -68,21 +67,20 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity){
 		if(!world.isRemote){
 			NBTTagCompound entCompound = entity.getEntityData();
-			long lastInPortal = entCompound.getLong("lastInPortal");
+			Location teLocation = new Location(x,y,z);
+			TilePortalTeleporter teleporter = (TilePortalTeleporter)teLocation.getTE(world);
+			Location teleportLocation = teleporter.getPortalBase().getTarget();
+			long lastInPortal = entCompound.getLong("lastInPortal" + teleporter.getPortalBase().getIPLong());
 			long minus = world.getTotalWorldTime() - lastInPortal;
 			//Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
-				Location teLocation = new Location(x,y,z);
-				TilePortalTeleporter teleporter = (TilePortalTeleporter)teLocation.getTE(world);
-				Location teleportLocation = teleporter.getPortalBase().getTarget();
-				
 				if(teleportLocation != null){
 					if(entity instanceof EntityPlayer){
 						((EntityPlayer)entity).setPositionAndUpdate(teleportLocation.getX(), teleportLocation.getY()+1, teleportLocation.getZ());	
 					}else{
 						entity.setLocationAndAngles(teleportLocation.getX(), teleportLocation.getY()+1, teleportLocation.getZ(), entity.rotationYaw, entity.rotationPitch);
 					}
-					entCompound.setLong("lastInPortal", world.getTotalWorldTime());
+					entCompound.setLong("lastInPortal" + teleporter.getPortalBase().getIPLong(), world.getTotalWorldTime());
 				}
 			}
 		}

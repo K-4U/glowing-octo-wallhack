@@ -39,9 +39,9 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 	}
 	
 	private void renderFrame(TilePortalFrame frame){
-		float rF = 0.8F;
-		float gF = 0.8F;
-		float bF = 0.8F;
+		float rF = 1.0F;
+		float gF = 1.0F;
+		float bF = 1.0F;
 		float colorFrameR = 1.0F;
 		float colorFrameG = 0.0F;
 		float colorFrameB = 0.0F;

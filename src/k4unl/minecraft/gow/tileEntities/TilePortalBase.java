@@ -60,6 +60,8 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		ip = tCompound.getLong("ip");
 		if(ip == 0){
 			genNewIP();
+		}else{
+			GlowingOctoWallHack.ipList.registerIP(ip, new Location(xCoord,yCoord,zCoord));
 		}
 		
 		
