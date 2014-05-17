@@ -31,7 +31,8 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_LIGHTING);
 		
 		renderFrame(myFrame);
-		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		

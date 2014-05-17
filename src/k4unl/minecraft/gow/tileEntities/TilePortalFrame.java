@@ -31,6 +31,9 @@ public class TilePortalFrame extends TileGOWBase{
 	@SideOnly(Side.CLIENT)
 	public boolean isConnectedTo(ForgeDirection dir){
 		Location thatLocation = new Location(xCoord, yCoord, zCoord, dir);
+		if(thatLocation == null || getWorldObj() == null){
+			return false;
+		}
 		if(thatLocation.getTE(getWorldObj()) instanceof TilePortalFrame ||  thatLocation.getTE(getWorldObj()) instanceof TilePortalBase){
 			return true;
 		}else{
