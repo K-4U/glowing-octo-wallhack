@@ -49,7 +49,9 @@ public class GOWItemBase extends Item {
 		if(itemStack.getTagCompound() == null){
 			itemStack.setTagCompound(new NBTTagCompound());
 		}
-		itemStack.getTagCompound().setString("defaultInfo", info);
+		NBTTagCompound stackCompound = itemStack.getTagCompound();
+		stackCompound.setString("defaultInfo", info);
+		itemStack.setTagCompound(stackCompound);
 	}
 	
 	@Override

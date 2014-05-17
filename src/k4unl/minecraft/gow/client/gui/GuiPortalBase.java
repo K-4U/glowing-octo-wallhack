@@ -35,6 +35,8 @@ public class GuiPortalBase extends GuiContainer {
 		
 		drawHorizontalAlignedString(82 + x, 44 + y, 76, base.getIPString(), false);
 		drawHorizontalAlignedString(82 + x, 24 + y, 76, "IP-address:", false);
+		
+		drawHorizontalAlignedString(0 + x, 24 + y, 76, "Link card:", false);
 		//fontRendererObj.drawString(base.getIPString(), 82 + x, 28+y, 0xFFFFFF, true);
 	}
 	

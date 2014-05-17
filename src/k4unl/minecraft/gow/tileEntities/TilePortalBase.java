@@ -30,8 +30,6 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	
 	public TilePortalBase(){
 		frames = new ArrayList<Location>();
-		
-		
 	}
 	
 	private void genNewIP(){
@@ -55,6 +53,10 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
 		
+		NBTTagCompound linkCardNBT = tCompound.getCompoundTag("linkingCard");
+		if(linkCardNBT != null){
+			linkingCard = ItemStack.loadItemStackFromNBT(linkCardNBT);
+		}
 		ip = tCompound.getLong("ip");
 		if(ip == 0){
 			genNewIP();
@@ -101,6 +103,10 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}
 		if(portalDir != null){
 			tCompound.setInteger("portalDir", portalDir.ordinal());
+		}
+		if(linkingCard != null){
+			NBTTagCompound linkCardNBT = linkingCard.writeToNBT(new NBTTagCompound());
+			tCompound.setTag("linkinCard", linkCardNBT);
 		}
 		
 		tCompound.setLong("ip", ip);
@@ -395,6 +401,10 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	@Override
 	public boolean isItemValidForSlot(int var1, ItemStack var2) {
 		return (var2.getItem() instanceof ItemIPCard);
+	}
+
+	public boolean getIsValid() {
+		return portalFormed;
 	}
 }
 

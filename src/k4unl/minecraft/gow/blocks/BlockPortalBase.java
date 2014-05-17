@@ -32,7 +32,11 @@ public class BlockPortalBase extends GOWBlockRendering {
 			return false;
 		}
 		
-		player.openGui(GlowingOctoWallHack.instance, GuiIDS.GUIPortalBase, world, x, y, z);
+		if(((TilePortalBase)entity).getIsValid()){
+			player.openGui(GlowingOctoWallHack.instance, GuiIDS.GUIPortalBase, world, x, y, z);
+		}else{
+			return false;
+		}
 		return true;
 	}
 }

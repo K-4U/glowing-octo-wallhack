@@ -22,10 +22,13 @@ public class ItemIPCard extends GOWItemBase {
 				if(itemStack.getTagCompound() == null){
 					itemStack.setTagCompound(new NBTTagCompound());
 				}
+				NBTTagCompound stackCompound = itemStack.getTagCompound();
 				((ItemIPCard)GOWItems.itemIPCard).setDefaultInfo(itemStack, "Linked to: " + ((TilePortalBase)ent).getIPString());
 				
-				itemStack.getTagCompound().setLong("linked", ((TilePortalBase)ent).getIPLong());
+				stackCompound.setLong("linked", ((TilePortalBase)ent).getIPLong());
 				((ItemIPCard)GOWItems.itemIPCard).setEffect(itemStack, true);
+				
+				itemStack.setTagCompound(stackCompound);
 			}
 		}
 		
