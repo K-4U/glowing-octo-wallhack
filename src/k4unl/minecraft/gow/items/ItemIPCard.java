@@ -4,6 +4,7 @@ import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -18,6 +19,9 @@ public class ItemIPCard extends GOWItemBase {
 		if(!world.isRemote){
 			TileEntity ent = world.getTileEntity(x, y, z);
 			if(ent instanceof TilePortalBase){
+				if(itemStack.getTagCompound() == null){
+					itemStack.setTagCompound(new NBTTagCompound());
+				}
 				((ItemIPCard)GOWItems.itemIPCard).setDefaultInfo(itemStack, "Linked to: " + ((TilePortalBase)ent).getIPString());
 				
 				itemStack.getTagCompound().setLong("linked", ((TilePortalBase)ent).getIPLong());
@@ -27,5 +31,19 @@ public class ItemIPCard extends GOWItemBase {
 		
 		return false;
 	}
+	
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player){
+		if(player.isSneaking()){
+			if(itemStack.getTagCompound() == null){
+				itemStack.setTagCompound(new NBTTagCompound());
+			}
+			((ItemIPCard)GOWItems.itemIPCard).setDefaultInfo(itemStack, "");
+			
+			itemStack.getTagCompound().setLong("linked", 0);
+			((ItemIPCard)GOWItems.itemIPCard).setEffect(itemStack, false);
+		}
+        return itemStack;
+    }
+
 
 }

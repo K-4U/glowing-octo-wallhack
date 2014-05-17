@@ -1,0 +1,13 @@
+[
+    {
+        "modid":        "gow",
+        "name":         "Glowing-Octo-Wallhack",
+        "description":  "Portals? Heck yeah!",
+        "version":      "{$version}",
+        "mcversion":    "$mcversion",
+        "url":          "https://github.com/K-4U/glowing-octo-wallhack",
+        "authorList":   [
+            "K4Unl"
+        ]
+    }
+]

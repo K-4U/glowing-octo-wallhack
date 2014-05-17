@@ -54,7 +54,9 @@ public class GOWItemBase extends Item {
 	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
-		list.add(defaultInfo);
+		if(defaultInfo != ""){
+			list.add(defaultInfo);
+		}
 		if(itemStack.getTagCompound() != null){
 			if(itemStack.getTagCompound().getString("defaultInfo") != ""){
 				list.add(itemStack.getTagCompound().getString("defaultInfo"));
