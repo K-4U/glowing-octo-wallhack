@@ -13,10 +13,12 @@ import org.lwjgl.opengl.GL11;
 public class GuiPortalBase extends GuiContainer {
 
 	protected static final ResourceLocation resLoc = new ResourceLocation(ModInfo.LID, "textures/gui/portalBase.png");
+	protected TilePortalBase base;
 	
 	public GuiPortalBase(InventoryPlayer invPlayer, TilePortalBase _base) {
 		super(new ContainerPortalBase(invPlayer, _base));
 
+		base = _base;
 	}
 
 	@Override
@@ -29,6 +31,9 @@ public class GuiPortalBase extends GuiContainer {
 		int y = (height - ySize) / 2;
 		
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
+		//Draw IP address
+		
+		fontRendererObj.drawString(base.getIPString(), 82 + x, 28+y, 0xFFFFFF, true);
 	}
 	
 	@Override
