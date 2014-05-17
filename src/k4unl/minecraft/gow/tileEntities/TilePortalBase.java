@@ -5,15 +5,18 @@ import java.util.List;
 
 import k4unl.minecraft.gow.GlowingOctoWallHack;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.items.ItemIPCard;
 import k4unl.minecraft.gow.lib.IPs;
-import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TilePortalBase extends TileGOWBase {
+public class TilePortalBase extends TileGOWBase implements IInventory {
 	private boolean portalFormed;
 	private boolean portalEnabled;
 	private int portalWidth;
@@ -22,6 +25,8 @@ public class TilePortalBase extends TileGOWBase {
 	private ForgeDirection portalDir;
 	private List<Location> frames;
 	private long ip;
+	
+	private ItemStack linkingCard;
 	
 	public TilePortalBase(){
 		frames = new ArrayList<Location>();
@@ -50,6 +55,9 @@ public class TilePortalBase extends TileGOWBase {
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
 		
 		ip = tCompound.getLong("ip");
+		if(ip == 0){
+			genNewIP();
+		}
 		
 		
 		readFramesFromNBT(tCompound);
@@ -322,6 +330,66 @@ public class TilePortalBase extends TileGOWBase {
 	
 	public Long getIPLong() {
 		return ip;
+	}
+
+	@Override
+	public int getSizeInventory() {
+		return 1;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int var1) {
+		return linkingCard;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int var1, int var2) {
+		ItemStack tempStack = linkingCard.copy();
+		linkingCard = null;
+		return tempStack;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		return linkingCard;
+	}
+
+	@Override
+	public void setInventorySlotContents(int var1, ItemStack var2) {
+		if(var1 == 0){
+			linkingCard = var2;
+		}
+	}
+
+	@Override
+	public String getInventoryName() {
+		return null;
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 1;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer var1) {
+		return true;
+	}
+
+	@Override
+	public void openInventory() {}
+
+	@Override
+	public void closeInventory() {	}
+
+	@Override
+	public boolean isItemValidForSlot(int var1, ItemStack var2) {
+		return (var2.getItem() instanceof ItemIPCard);
 	}
 }
 
