@@ -7,6 +7,7 @@ import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -31,6 +32,14 @@ public class TilePortalBase extends TileGOWBase {
 		portalWidth = tCompound.getInteger("portalWidth");
 		portalHeight = tCompound.getInteger("portalHeight");
 		
+		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
+		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
+	}
+	
+	private void writeFramesToNBT(NBTTagCompound tCompound){
+		for(TilePortalFrame fr : frames){
+			
+		}
 	}
 	
 	@Override
