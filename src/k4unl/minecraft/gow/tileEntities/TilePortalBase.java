@@ -271,7 +271,9 @@ public class TilePortalBase extends TileGOWBase {
 				}
 			}
 			for(Location fr : frames){
-				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
+				if(fr.getTE(getWorldObj()) != null){
+					((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
+				}
 			}
 		}
 	}
@@ -289,7 +291,9 @@ public class TilePortalBase extends TileGOWBase {
 				}
 			}
 			for(Location fr : frames){
-				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(false);
+				if(fr.getTE(getWorldObj()) != null){
+					((TilePortalFrame)fr.getTE(getWorldObj())).setActive(false);
+				}
 			}
 		}
 	}

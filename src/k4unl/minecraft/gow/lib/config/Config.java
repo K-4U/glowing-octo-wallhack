@@ -52,6 +52,7 @@ public class Config {
 	static {
 		configOptions.add(new configOption("maxPortalHeight", 10));
 		configOptions.add(new configOption("maxPortalWidth", 10));
+		configOptions.add(new configOption("portalTimeoutInSeconds", 20));
 	}
 	
 	public static void loadConfigOptions(Configuration c){

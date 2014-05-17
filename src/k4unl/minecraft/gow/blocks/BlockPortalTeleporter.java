@@ -7,6 +7,7 @@ import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -68,6 +69,8 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			}else{
 				entity.setLocationAndAngles(x+10, y+10, z+10, entity.rotationYaw, entity.rotationPitch);
 			}
+			NBTTagCompound entCompound = entity.getEntityData();
+			
 			
 		}
 	}
