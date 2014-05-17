@@ -9,6 +9,8 @@ public class GOWItems {
 	
 	public static void init(){
 		itemIPCard = new ItemIPCard();
+		
+		registerItems();
 	}
 	
 	private static void registerItems(){

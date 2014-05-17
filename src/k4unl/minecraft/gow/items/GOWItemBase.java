@@ -3,10 +3,10 @@ package k4unl.minecraft.gow.items;
 import java.util.List;
 
 import k4unl.minecraft.gow.lib.CustomTabs;
-import k4unl.minecraft.gow.lib.config.ModInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class GOWItemBase extends Item {
 
@@ -19,7 +19,7 @@ public class GOWItemBase extends Item {
 		
 		mName = name;
 		setMaxStackSize(64);
-		setUnlocalizedName(ModInfo.LID + ":" + name);
+		setUnlocalizedName(name);
 		
 		setCreativeTab(CustomTabs.tabGOW);
 	}
@@ -35,6 +35,9 @@ public class GOWItemBase extends Item {
 	
 	@Override
 	public boolean hasEffect(ItemStack itemStack){
+		if(itemStack.getTagCompound() == null){
+			itemStack.setTagCompound(new NBTTagCompound());
+		}
 		return hasEffect || itemStack.getTagCompound().getBoolean("hasEffect");
 	}
 	
@@ -43,14 +46,19 @@ public class GOWItemBase extends Item {
 	}
 	
 	public void setDefaultInfo(ItemStack itemStack, String info){
+		if(itemStack.getTagCompound() == null){
+			itemStack.setTagCompound(new NBTTagCompound());
+		}
 		itemStack.getTagCompound().setString("defaultInfo", info);
 	}
 	
 	@Override
 	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
 		list.add(defaultInfo);
-		if(itemStack.getTagCompound().getString("defaultInfo") != ""){
-			list.add(itemStack.getTagCompound().getString("defaultInfo"));
+		if(itemStack.getTagCompound() != null){
+			if(itemStack.getTagCompound().getString("defaultInfo") != ""){
+				list.add(itemStack.getTagCompound().getString("defaultInfo"));
+			}
 		}
 	}
 	
