@@ -1,5 +1,6 @@
 package k4unl.minecraft.gow.lib.helperClasses;
 
+import k4unl.minecraft.gow.lib.Log;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
@@ -17,9 +18,13 @@ public class Location {
 	}
 	
 	public Location(int[] loc){
-		x = loc[0];
-		y = loc[1];
-		z = loc[2];
+		if(loc.length > 2){
+			x = loc[0];
+			y = loc[1];
+			z = loc[2];
+		}else{
+			Log.error("Trying to load a location with a wrong int array!");
+		}
 	}
 	
 	public Location(int _x, int _y, int _z, ForgeDirection d, int offset){

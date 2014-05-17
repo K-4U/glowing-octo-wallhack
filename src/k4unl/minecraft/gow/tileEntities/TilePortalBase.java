@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
+import k4unl.minecraft.gow.lib.Log;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
@@ -47,6 +48,7 @@ public class TilePortalBase extends TileGOWBase {
 			frames.add(frameLocation);
 			i++;
 		}
+		Log.info("Done with loading");
 	}
 	
 	private void writeFramesToNBT(NBTTagCompound tCompound){
