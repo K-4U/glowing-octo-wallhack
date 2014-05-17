@@ -16,11 +16,13 @@ public class TileGOWBase extends TileEntity {
 	@Override
 	public void readFromNBT(NBTTagCompound tCompound){
 		super.readFromNBT(tCompound);
+		
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
+		
 	}
 	
 	public void checkRedstonePower(){

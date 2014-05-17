@@ -24,6 +24,21 @@ public class TilePortalBase extends TileGOWBase {
 	}
 	
 	@Override
+	public void readFromNBT(NBTTagCompound tCompound){
+		super.readFromNBT(tCompound);
+		portalFormed = tCompound.getBoolean("portalFormed");
+		portalEnabled = tCompound.getBoolean("portalEnabled");
+		portalWidth = tCompound.getInteger("portalWidth");
+		portalHeight = tCompound.getInteger("portalHeight");
+		
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tCompound){
+		super.writeToNBT(tCompound);
+	}
+	
+	@Override
 	public void updateEntity(){
 		super.updateEntity();
 		//Every 10 ticks, check for a complete portal.
@@ -179,15 +194,7 @@ public class TilePortalBase extends TileGOWBase {
 		super.validate();
 	}
 	
-	@Override
-	public void readFromNBT(NBTTagCompound tCompound){
-		super.readFromNBT(tCompound);
-	}
 	
-	@Override
-	public void writeToNBT(NBTTagCompound tCompound){
-		super.writeToNBT(tCompound);
-	}
 	
 	@Override
 	protected void redstoneChanged(){
