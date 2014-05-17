@@ -26,8 +26,14 @@ public class TilePortalBase extends TileGOWBase {
 	public TilePortalBase(){
 		frames = new ArrayList<Location>();
 		
+		
+	}
+	
+	private void genNewIP(){
+		if(ip != 0){
+			GlowingOctoWallHack.ipList.removeIP(ip);
+		}
 		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
-		Log.info("Initialized new portal with IP" + IP);
 		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP));
 		ip = IPs.ipToLong(IP);
 	}
@@ -43,6 +49,9 @@ public class TilePortalBase extends TileGOWBase {
 		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
 		
+		ip = tCompound.getLong("ip");
+		
+		
 		readFramesFromNBT(tCompound);
 		
 	}
@@ -53,13 +62,8 @@ public class TilePortalBase extends TileGOWBase {
 		int i = 0;
 		for(i = 0; i < list.getInteger("max"); i++){
 			Location frameLocation = new Location(list.getIntArray(""+i));
-			Log.info("Adding " + i + " with location: " + frameLocation.print());
 			frames.add(frameLocation);
 		}
-		if(frames.size() != list.getInteger("max")){
-			Log.error("Something isn't right here");
-		}
-		Log.info("Done with loading");
 	}
 	
 	private void writeFramesToNBT(NBTTagCompound tCompound){
@@ -85,6 +89,8 @@ public class TilePortalBase extends TileGOWBase {
 		
 		tCompound.setInteger("baseDir", baseDir.ordinal());
 		tCompound.setInteger("portalDir", portalDir.ordinal());
+		
+		tCompound.setLong("ip", ip);
 		
 		writeFramesToNBT(tCompound);
 	}
