@@ -1,7 +1,5 @@
 package k4unl.minecraft.gow.tileEntities;
 
-import gnu.trove.list.array.TCharArrayList;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +7,6 @@ import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -60,7 +57,7 @@ public class TilePortalBase extends TileGOWBase {
 			list.setIntArray("" + i, fr.getBlockLocation().getIntArray());
 			i++;
 		}
-		tCompound.setInteger("max", i-1);
+		list.setInteger("max", i-1);
 		
 		tCompound.setTag("portalFrames", list);
 	}
