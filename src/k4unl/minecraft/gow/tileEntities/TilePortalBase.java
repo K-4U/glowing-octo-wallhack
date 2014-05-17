@@ -17,10 +17,10 @@ public class TilePortalBase extends TileGOWBase {
 	private int portalHeight;
 	private ForgeDirection baseDir;
 	private ForgeDirection portalDir;
-	private List<TilePortalFrame> frames;
+	private List<Location> frames;
 	
 	public TilePortalBase(){
-		frames = new ArrayList<TilePortalFrame>();
+		frames = new ArrayList<Location>();
 	}
 	
 	@Override
@@ -43,9 +43,7 @@ public class TilePortalBase extends TileGOWBase {
 		int i = 0;
 		for(i = 0; i <= list.getInteger("max"); i++){
 			Location frameLocation = new Location(list.getIntArray(""+i));
-			if(frameLocation.getTE(getWorldObj()) instanceof TilePortalFrame){
-				frames.add((TilePortalFrame) frameLocation.getTE(getWorldObj()));
-			}
+			frames.add(frameLocation);
 			i++;
 		}
 	}
@@ -53,8 +51,8 @@ public class TilePortalBase extends TileGOWBase {
 	private void writeFramesToNBT(NBTTagCompound tCompound){
 		NBTTagCompound list = new NBTTagCompound();
 		int i = 0;
-		for(TilePortalFrame fr : frames){
-			list.setIntArray("" + i, fr.getBlockLocation().getIntArray());
+		for(Location fr : frames){
+			list.setIntArray("" + i, fr.getIntArray());
 			i++;
 		}
 		list.setInteger("max", i-1);
@@ -197,12 +195,12 @@ public class TilePortalBase extends TileGOWBase {
 			TileEntity te = handleLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
-				frames.add((TilePortalFrame) te);
+				frames.add(handleLocation);
 			}
 			te = topLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
-				frames.add((TilePortalFrame) te);
+				frames.add(topLocation);
 			}
 		}
 		for(int y = 0; y <= portalHeight; y++){
@@ -211,16 +209,17 @@ public class TilePortalBase extends TileGOWBase {
 			TileEntity te = leftLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
-				frames.add((TilePortalFrame) te);
+				frames.add(leftLocation);
 			}
 			te = rightLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
-				frames.add((TilePortalFrame) te);
+				frames.add(rightLocation);
 			}
 		}
 		
 		portalFormed = true;
+		markDirty();
 	}
 	
 	private void invalidatePortal(){
@@ -261,10 +260,11 @@ public class TilePortalBase extends TileGOWBase {
 					teleporter.setRotation(baseDir, portalDir);
 				}
 			}
-			for(TilePortalFrame fr : frames){
-				fr.setActive(true);
+			for(Location fr : frames){
+				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
 			}
 		}
+		markDirty();
 	}
 	
 	private void disablePortal(){
@@ -279,9 +279,10 @@ public class TilePortalBase extends TileGOWBase {
 					getWorldObj().setBlockToAir(portalLocation.getX(), portalLocation.getY(), portalLocation.getZ());
 				}
 			}
-			for(TilePortalFrame fr : frames){
-				fr.setActive(false);
+			for(Location fr : frames){
+				((TilePortalFrame)fr.getTE(getWorldObj())).setActive(false);
 			}
+			markDirty();
 		}
 	}
 	
