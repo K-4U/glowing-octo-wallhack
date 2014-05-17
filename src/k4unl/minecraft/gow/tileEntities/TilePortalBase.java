@@ -37,6 +37,8 @@ public class TilePortalBase extends TileGOWBase {
 		baseDir = ForgeDirection.getOrientation(tCompound.getInteger("baseDir"));
 		portalDir = ForgeDirection.getOrientation(tCompound.getInteger("portalDir"));
 		
+		readFramesFromNBT(tCompound);
+		
 	}
 	
 	private void readFramesFromNBT(NBTTagCompound tCompound){
@@ -44,8 +46,9 @@ public class TilePortalBase extends TileGOWBase {
 		int i = 0;
 		for(i = 0; i <= list.getInteger("max"); i++){
 			Location frameLocation = new Location(list.getIntArray(""+i));
-			
-			//list.setIntArray("" + i, fr.getBlockLocation().getIntArray());
+			if(frameLocation.getTE(getWorldObj()) instanceof TilePortalFrame){
+				frames.add((TilePortalFrame) frameLocation.getTE(getWorldObj()));
+			}
 			i++;
 		}
 	}
@@ -65,6 +68,16 @@ public class TilePortalBase extends TileGOWBase {
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
+		
+		tCompound.setBoolean("portalFormed", portalFormed);
+		tCompound.setBoolean("portalEnabled", portalEnabled);
+		tCompound.setInteger("portalWidth", portalWidth);
+		tCompound.setInteger("portalHeight", portalHeight);
+		
+		tCompound.setInteger("baseDir", baseDir.ordinal());
+		tCompound.setInteger("portalDir", portalDir.ordinal());
+		
+		writeFramesToNBT(tCompound);
 	}
 	
 	@Override
