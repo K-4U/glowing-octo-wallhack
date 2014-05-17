@@ -41,6 +41,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
 		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP));
 		ip = IPs.ipToLong(IP);
+		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 	
 	@Override
@@ -95,8 +96,12 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		tCompound.setInteger("portalWidth", portalWidth);
 		tCompound.setInteger("portalHeight", portalHeight);
 		
-		tCompound.setInteger("baseDir", baseDir.ordinal());
-		tCompound.setInteger("portalDir", portalDir.ordinal());
+		if(baseDir != null){
+			tCompound.setInteger("baseDir", baseDir.ordinal());
+		}
+		if(portalDir != null){
+			tCompound.setInteger("portalDir", portalDir.ordinal());
+		}
 		
 		tCompound.setLong("ip", ip);
 		

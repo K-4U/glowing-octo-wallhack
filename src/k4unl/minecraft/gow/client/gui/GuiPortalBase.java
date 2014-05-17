@@ -33,7 +33,9 @@ public class GuiPortalBase extends GuiContainer {
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 		//Draw IP address
 		
-		fontRendererObj.drawString(base.getIPString(), 82 + x, 28+y, 0xFFFFFF, true);
+		drawHorizontalAlignedString(82 + x, 44 + y, 76, base.getIPString(), false);
+		drawHorizontalAlignedString(82 + x, 24 + y, 76, "IP-address:", false);
+		//fontRendererObj.drawString(base.getIPString(), 82 + x, 28+y, 0xFFFFFF, true);
 	}
 	
 	@Override
