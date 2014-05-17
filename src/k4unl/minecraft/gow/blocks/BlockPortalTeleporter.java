@@ -70,7 +70,7 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			NBTTagCompound entCompound = entity.getEntityData();
 			long lastInPortal = entCompound.getLong("lastInPortal");
 			long minus = world.getTotalWorldTime() - lastInPortal;
-			Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
+			//Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
 				Location teLocation = new Location(x,y,z);
 				TilePortalTeleporter teleporter = (TilePortalTeleporter)teLocation.getTE(world);

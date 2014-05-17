@@ -21,7 +21,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 
 	}
 	
-	private void doRender(TilePortalFrame myFrame, double x, double y, double z, float frame){
+	public void doRender(TilePortalFrame myFrame, double x, double y, double z, float frame){
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
 		
