@@ -1,6 +1,13 @@
 package k4unl.minecraft.gow.lib;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -21,7 +28,40 @@ public class IPs {
 		rnd = new Random(System.currentTimeMillis()/1000);
 	}
 	
-	public void readFromFile(File f){
+	public void readFromFile(File dir){
+		registeredIps.clear();
+		if(dir != null){
+			Gson gson = new Gson();
+			String p = dir.getAbsolutePath();
+			p += "/portals.json";
+			File f = new File(p);
+			if(!f.exists()){
+				try {
+					f.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			try {
+				FileInputStream ipStream = new FileInputStream(f);
+				InputStreamReader reader = new InputStreamReader(ipStream);
+				BufferedReader bReader = new BufferedReader(reader);
+				String json = bReader.readLine();
+				reader.close();
+				ipStream.close();
+				bReader.close();
+				Log.info("Read from file: " + json);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			
+		}
+		
+		
 		NBTTagCompound tCompound = new NBTTagCompound();
 		isLoaded = true;
 		int entries = tCompound.getInteger("entries");
@@ -33,22 +73,31 @@ public class IPs {
 		}
 	}
 	
-	public void saveToFile(File file){
-		if(file != null){
+	public void saveToFile(File dir){
+		if(dir != null){
 			Gson gson = new Gson();
 			String json = gson.toJson(registeredIps);
 			Log.info("Saving: " + json);
+			String p = dir.getAbsolutePath();
+			p += "/portals.json";
+			File f = new File(p);
+			if(!f.exists()){
+				try {
+					f.createNewFile();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			try {
+				PrintWriter opStream = new PrintWriter(f);
+				opStream.write(json);
+				opStream.flush();
+				opStream.close();
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			
 		}
-		/*
-		int i = 0;
-		for(Map.Entry<Long, Location> entry : registeredIps.entrySet()){
-			NBTTagCompound entryCompound = new NBTTagCompound();
-			entryCompound.setLong("key", entry.getKey());
-			entryCompound.setIntArray("location", entry.getValue().getIntArray());
-			tCompound.setTag(i+"", entryCompound);
-			i++;
-		}
-		tCompound.setInteger("entries", registeredIps.size());*/
 	}
 	
 	public boolean IPExists(long ip){
@@ -103,9 +152,5 @@ public class IPs {
 
 	public Location getLocation(long linked) {
 		return registeredIps.get(linked);
-	}
-	
-	public void load(File file) {
-		
 	}
 }
