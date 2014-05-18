@@ -19,12 +19,18 @@ public class IPs extends WorldSavedData {
 	
 	public static IPs forWorld(World world){
 		MapStorage storage = world.perWorldStorage;
-		IPs result = (IPs)storage.loadData(WorldData.class, key);
+		IPs result = (IPs)storage.loadData(IPs.class, key);
 		if(result == null){
 			result = new IPs();
 			storage.setData(key, result);
 		}
 		return result;
+	}
+	
+	public IPs(String key){
+		super(key);
+		registeredIps = new HashMap<Long, Location>();
+		rnd = new Random(System.currentTimeMillis()/1000);
 	}
 	
 	public IPs(){

@@ -33,7 +33,7 @@ public class GlowingOctoWallHack {
 	@Instance(value=ModInfo.ID)
 	public static GlowingOctoWallHack instance;
 	
-	public static IPs ipList = new IPs();
+	public static IPs ipList;
 	
 	@SidedProxy(
 			clientSide = ModInfo.PROXY_LOCATION + ".ClientProxy",
