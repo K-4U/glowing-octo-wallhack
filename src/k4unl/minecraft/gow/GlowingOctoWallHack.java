@@ -1,5 +1,7 @@
 package k4unl.minecraft.gow;
 
+import java.io.File;
+
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.client.gui.GuiHandler;
 import k4unl.minecraft.gow.events.EventHelper;
@@ -7,6 +9,7 @@ import k4unl.minecraft.gow.items.GOWItems;
 import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.IPs;
 import k4unl.minecraft.gow.lib.Log;
+import k4unl.minecraft.gow.lib.config.ConfigHandler;
 import k4unl.minecraft.gow.lib.config.ModInfo;
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.proxy.CommonProxy;
@@ -43,6 +46,8 @@ public class GlowingOctoWallHack {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		File ConfigDir = event.getModConfigurationDirectory();
 		
 		GOWBlocks.init();
 		GOWItems.init();

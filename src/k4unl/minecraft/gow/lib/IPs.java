@@ -42,7 +42,13 @@ public class IPs extends WorldSavedData {
 	@Override
 	public void readFromNBT(NBTTagCompound tCompound){
 		isLoaded = true;
-		
+		int entries = tCompound.getInteger("entries");
+		for(int i = 0; i<entries; i++){
+			NBTTagCompound entryCompound = tCompound.getCompoundTag(""+i);
+			long key = entryCompound.getLong("key");
+			Location value = new Location(entryCompound.getIntArray("location"));
+			registeredIps.put(key, value);
+		}
 	}
 	
 	@Override
@@ -53,6 +59,7 @@ public class IPs extends WorldSavedData {
 			entryCompound.setLong("key", entry.getKey());
 			entryCompound.setIntArray("location", entry.getValue().getIntArray());
 			tCompound.setTag(i+"", entryCompound);
+			i++;
 		}
 		tCompound.setInteger("entries", registeredIps.size());
 	}
