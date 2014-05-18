@@ -1,7 +1,7 @@
 package k4unl.minecraft.gow.lib;
 
+import k4unl.minecraft.gow.blocks.GOWBlocks;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class CustomTabs {
@@ -13,8 +13,7 @@ public class CustomTabs {
 			
 			@Override
 			public Item getTabIconItem() {
-				//TODO: CHANGE ME
-				return Items.apple;
+				return Item.getItemFromBlock(GOWBlocks.portalBase);
 			}
 		};
 	}
