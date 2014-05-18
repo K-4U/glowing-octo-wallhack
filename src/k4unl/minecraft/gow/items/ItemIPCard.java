@@ -15,6 +15,7 @@ public class ItemIPCard extends GOWItemBase {
 
 	public ItemIPCard() {
 		super(Names.itemIPCard);
+		setMaxStackSize(1);
 	}
 	
 	@Override
