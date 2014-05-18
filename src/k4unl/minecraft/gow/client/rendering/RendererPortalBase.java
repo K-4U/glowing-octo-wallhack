@@ -120,14 +120,14 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 			colorFaceB = 27.0F;
 			break;
 		case 14:
-			colorFaceR = 0.0F;
-			colorFaceG = 0.0F;
-			colorFaceB = 0.0F;
+			colorFaceR = 150.0F;
+			colorFaceG = 52.0F;
+			colorFaceB = 48.0F;
 			break;
 		case 15:
-			colorFaceR = 255.0F;
-			colorFaceG = 255.0F;
-			colorFaceB = 255.0F;
+			colorFaceR = 25.0F;
+			colorFaceG = 22.0F;
+			colorFaceB = 22.0F;
 			default:
 				break;
 		}

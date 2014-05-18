@@ -442,10 +442,16 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		colorIndex = i;
 		markDirty();
 		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+		//Update frames
+		
 	}
 	
 	public int getDye(){
 		return colorIndex;
+	}
+	
+	public Location getBlockLocation() {
+		return new Location(xCoord, yCoord, zCoord);
 	}
 }
 

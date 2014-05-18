@@ -39,9 +39,100 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 	}
 	
 	private void renderFrame(TilePortalFrame frame){
-		float rF = 1.0F;
-		float gF = 1.0F;
-		float bF = 1.0F;
+		float colorFaceR = 255.0F;
+		float colorFaceG = 255.0F;
+		float colorFaceB = 255.0F;
+		if(frame.getBase() != null){
+			int color = frame.getDye();
+			
+			switch(color){
+			case 0:
+				colorFaceR = 221.0F;
+				colorFaceG = 221.0F;
+				colorFaceB = 221.0F;
+				break;
+			case 1:
+				colorFaceR = 219.0F;
+				colorFaceG = 125.0F;
+				colorFaceB = 62.0F;
+				break;
+			case 2:
+				colorFaceR = 179.0F;
+				colorFaceG = 80.0F;
+				colorFaceB = 188.0F;
+				break;
+			case 3:
+				colorFaceR = 107.0F;
+				colorFaceG = 138.0F;
+				colorFaceB = 1201.0F;
+				break;
+			case 4:
+				colorFaceR = 177.0F;
+				colorFaceG = 166.0F;
+				colorFaceB = 39.0F;
+				break;
+			case 5:
+				colorFaceR = 65.0F;
+				colorFaceG = 174.0F;
+				colorFaceB = 56.0F;
+				break;
+			case 6:
+				colorFaceR = 208.0F;
+				colorFaceG = 132.0F;
+				colorFaceB = 153.0F;
+				break;
+			case 7:
+				colorFaceR = 64.0F;
+				colorFaceG = 64.0F;
+				colorFaceB = 64.0F;
+				break;
+			case 8:
+				colorFaceR = 154.0F;
+				colorFaceG = 161.0F;
+				colorFaceB = 161.0F;
+				break;
+			case 9:
+				colorFaceR = 46.0F;
+				colorFaceG = 110.0F;
+				colorFaceB = 137.0F;
+				break;
+			case 10:
+				colorFaceR = 126.0F;
+				colorFaceG = 61.0F;
+				colorFaceB = 181.0F;
+				break;
+			case 11:
+				colorFaceR = 46.0F;
+				colorFaceG = 56.0F;
+				colorFaceB = 141.0F;
+				break;
+			case 12:
+				colorFaceR = 79.0F;
+				colorFaceG = 50.0F;
+				colorFaceB = 31.0F;
+				break;
+			case 13:
+				colorFaceR = 53.0F;
+				colorFaceG = 70.0F;
+				colorFaceB = 27.0F;
+				break;
+			case 14:
+				colorFaceR = 150.0F;
+				colorFaceG = 52.0F;
+				colorFaceB = 48.0F;
+				break;
+			case 15:
+				colorFaceR = 25.0F;
+				colorFaceG = 22.0F;
+				colorFaceB = 22.0F;
+				default:
+					break;
+			}
+		}
+		colorFaceR = colorFaceR / 255.0F;
+		colorFaceG = colorFaceG / 255.0F;
+		colorFaceB = colorFaceB / 255.0F;
+		
 		float colorFrameR = 1.0F;
 		float colorFrameG = 0.0F;
 		float colorFrameB = 0.0F;
@@ -49,6 +140,9 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			colorFrameR = 0.0F;
 			colorFrameG = 1.0F;
 		}
+		
+		
+		
 		float minPP = RendererHelper.pixel * 6;
 		float minNP = RendererHelper.pixel * 5;
 		float maxPP = RendererHelper.pixel * (16-6);
@@ -63,7 +157,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		boolean isE = false;
 		boolean isW = false;
 		//Yuck
-		GL11.glColor3f(rF, gF, bF);
+		GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 		if(frame.isConnectedTo(ForgeDirection.NORTH)){
 			Vector3fMax vTB = new Vector3fMax(minPP, minNP, 0.0F, maxPP, maxNP, minNP);
 			Vector3fMax vEW = new Vector3fMax(minNP, minPP, 0.0F, maxNP, maxPP, minNP);
@@ -91,7 +185,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			isN = true;
 		}
 		if(frame.isConnectedTo(ForgeDirection.SOUTH)){
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			Vector3fMax vTB = new Vector3fMax(minPP, minNP, maxNP, maxPP, maxNP, 1.0F);
 			Vector3fMax vEW = new Vector3fMax(minNP, minPP, maxNP, maxNP, maxPP, 1.0F);
 			RendererHelper.renderSide(vTB, ForgeDirection.UP);
@@ -120,7 +214,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		if(frame.isConnectedTo(ForgeDirection.EAST)){
 			Vector3fMax vTB = new Vector3fMax(maxNP, minNP, minPP, 1.0F, maxNP, maxPP);
 			Vector3fMax vNS = new Vector3fMax(maxNP, minPP, minNP, 1.0F, maxPP, maxNP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vTB, ForgeDirection.UP);
 			RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 			
@@ -147,7 +241,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		if(frame.isConnectedTo(ForgeDirection.WEST)){
 			Vector3fMax vTB = new Vector3fMax(0.0F, minNP, minPP, minNP, maxNP, maxPP);
 			Vector3fMax vNS = new Vector3fMax(0.0F, minPP, minNP, minNP, maxPP, maxNP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vTB, ForgeDirection.UP);
 			RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 			
@@ -175,7 +269,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		if(frame.isConnectedTo(ForgeDirection.UP)){
 			Vector3fMax vNS = new Vector3fMax(minPP, maxNP, minNP, maxPP, 1.0F, maxNP);
 			Vector3fMax vEW = new Vector3fMax(minNP, maxNP, minPP, maxNP, 1.0F, maxPP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vNS, ForgeDirection.NORTH);
 			RendererHelper.renderSide(vNS, ForgeDirection.SOUTH);
 			
@@ -203,7 +297,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		if(frame.isConnectedTo(ForgeDirection.DOWN)){
 			Vector3fMax vNS = new Vector3fMax(minPP, 0.0F, minNP, maxPP, minNP, maxNP);
 			Vector3fMax vEW = new Vector3fMax(minNP, 0.0F, minPP, maxNP, minNP, maxPP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vNS, ForgeDirection.NORTH);
 			RendererHelper.renderSide(vNS, ForgeDirection.SOUTH);
 			
@@ -239,7 +333,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		if(isU && isD){
 			Vector3fMax vNS = new Vector3fMax(minPP, minNP, minNP, maxPP, maxNP, maxNP);
 			Vector3fMax vEW = new Vector3fMax(minNP, minNP, minPP, maxNP, maxNP, maxPP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vNS, ForgeDirection.NORTH);
 			RendererHelper.renderSide(vNS, ForgeDirection.SOUTH);
 			
@@ -262,7 +356,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 			RendererHelper.renderSide(vNSE, ForgeDirection.NORTH);
 			RendererHelper.renderSide(vNSE, ForgeDirection.SOUTH);
 		}else if(isN && isS){
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			Vector3fMax vTB = new Vector3fMax(minPP, minNP, minNP, maxPP, maxNP, maxNP);
 			Vector3fMax vEW = new Vector3fMax(minNP, minPP, minNP, maxNP, maxPP, maxNP);
 			
@@ -289,7 +383,7 @@ public class RendererPortalFrame extends TileEntitySpecialRenderer {
 		}else if(isE && isW){
 			Vector3fMax vTB = new Vector3fMax(minNP, minNP, minPP, maxNP, maxNP, maxPP);
 			Vector3fMax vNS = new Vector3fMax(minNP, minPP, minNP, maxNP, maxPP, maxNP);
-			GL11.glColor3f(rF, gF, bF);
+			GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 			RendererHelper.renderSide(vTB, ForgeDirection.UP);
 			RendererHelper.renderSide(vTB, ForgeDirection.DOWN);
 			

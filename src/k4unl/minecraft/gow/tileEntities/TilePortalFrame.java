@@ -11,7 +11,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class TilePortalFrame extends TileGOWBase{
 	private boolean hasSendPacket = true;
 	private boolean isActive;
-	private TilePortalBase parent;
+	private Location parentLocation;
+	//private TilePortalBase parent;
+	private int colorIndex = 0;
 	
 	@Override
 	public void updateEntity(){
@@ -45,16 +47,22 @@ public class TilePortalFrame extends TileGOWBase{
 	public void readFromNBT(NBTTagCompound tCompound){
 		super.readFromNBT(tCompound);
 		isActive = tCompound.getBoolean("isActive");
+		parentLocation = new Location(tCompound.getIntArray("parent"));
+		colorIndex = tCompound.getInteger("dye");
 	}
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
 		tCompound.setBoolean("isActive", isActive);
+		tCompound.setIntArray("parent", parentLocation.getIntArray());
+		tCompound.setInteger("dye",colorIndex);
 	}
 
 	public void setPortalBase(TilePortalBase tilePortalBase) {
-		parent = tilePortalBase;
+		parentLocation = tilePortalBase.getBlockLocation();
+		markDirty();
+		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public boolean getIsActive() {
@@ -70,4 +78,18 @@ public class TilePortalFrame extends TileGOWBase{
 	public Location getBlockLocation() {
 		return new Location(xCoord, yCoord, zCoord);
 	}
+	
+	public TilePortalBase getBase() {
+		return (TilePortalBase) parentLocation.getTE(getWorldObj());
+	}
+	public void dye(int i) {
+		colorIndex = i;
+		markDirty();
+		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public int getDye(){
+		return colorIndex;
+	}
+
 }
