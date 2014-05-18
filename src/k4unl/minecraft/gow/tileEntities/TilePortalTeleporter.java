@@ -89,4 +89,9 @@ public class TilePortalTeleporter extends TileGOWBase {
 	public void setBase(TilePortalBase tilePortalBase) {
 		portalBase = new Location(tilePortalBase.xCoord, tilePortalBase.yCoord, tilePortalBase.zCoord);
 	}
+	
+	@Override
+	public boolean shouldRenderInPass(int pass){
+		return true;
+	}
 }

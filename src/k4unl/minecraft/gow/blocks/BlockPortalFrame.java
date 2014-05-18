@@ -30,20 +30,20 @@ public class BlockPortalFrame extends GOWBlockRendering {
 		
 		if(ent instanceof TilePortalFrame){
 			TilePortalFrame frame = (TilePortalFrame)ent;
-			Vector3fMax vector = blockBounds;
+			Vector3fMax vector = blockBounds.copy();
 			if(frame.isConnectedTo(ForgeDirection.UP))
 				vector.setYMax(1.0F);
 			if(frame.isConnectedTo(ForgeDirection.DOWN))
 				vector.setYMin(0.0F);
 			
-			if(frame.isConnectedTo(ForgeDirection.WEST))
-				vector.setXMax(1.0F);
 			if(frame.isConnectedTo(ForgeDirection.EAST))
+				vector.setXMax(1.0F);
+			if(frame.isConnectedTo(ForgeDirection.WEST))
 				vector.setXMin(0.0F);
 			
-			if(frame.isConnectedTo(ForgeDirection.NORTH))
-				vector.setZMax(1.0F);
 			if(frame.isConnectedTo(ForgeDirection.SOUTH))
+				vector.setZMax(1.0F);
+			if(frame.isConnectedTo(ForgeDirection.NORTH))
 				vector.setZMin(0.0F);
 			
 			
@@ -57,20 +57,20 @@ public class BlockPortalFrame extends GOWBlockRendering {
 		
 		if(ent instanceof TilePortalFrame){
 			TilePortalFrame frame = (TilePortalFrame)ent;
-			Vector3fMax vector = blockBounds;
+			Vector3fMax vector = blockBounds.copy();
 			if(frame.isConnectedTo(ForgeDirection.UP))
 				vector.setYMax(1.0F);
 			if(frame.isConnectedTo(ForgeDirection.DOWN))
 				vector.setYMin(0.0F);
 			
 			if(frame.isConnectedTo(ForgeDirection.WEST))
-				vector.setXMax(1.0F);
-			if(frame.isConnectedTo(ForgeDirection.EAST))
 				vector.setXMin(0.0F);
+			if(frame.isConnectedTo(ForgeDirection.EAST))
+				vector.setXMax(1.0F);
 			
-			if(frame.isConnectedTo(ForgeDirection.NORTH))
-				vector.setZMax(1.0F);
 			if(frame.isConnectedTo(ForgeDirection.SOUTH))
+				vector.setZMax(1.0F);
+			if(frame.isConnectedTo(ForgeDirection.NORTH))
 				vector.setZMin(0.0F);
 			
 			

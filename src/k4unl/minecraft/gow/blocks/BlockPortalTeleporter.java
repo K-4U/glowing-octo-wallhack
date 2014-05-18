@@ -19,7 +19,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockPortalTeleporter extends GOWBlockRendering {
-	private static Vector3fMax blockBounds = new Vector3fMax(0.3F, 0.3F, 0.3F, 0.7F, 0.7F, 0.7F);
+	private static Vector3fMax blockBounds = new Vector3fMax(0.499F, 0.499F, 0.499F, 0.501F, 0.501F, 0.501F);
 	
 	
 	protected BlockPortalTeleporter() {
@@ -50,7 +50,7 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 		
 		if(ent instanceof TilePortalTeleporter){
 			TilePortalTeleporter teleporter = (TilePortalTeleporter)ent;
-			Vector3fMax vector = blockBounds;
+			Vector3fMax vector = blockBounds.copy();
 			if(teleporter.getBaseDir() != null){
 				if(teleporter.getBaseDir().equals(ForgeDirection.NORTH) | teleporter.getPortalDir().equals(ForgeDirection.NORTH)){
 					vector.setZMin(0.0F);
