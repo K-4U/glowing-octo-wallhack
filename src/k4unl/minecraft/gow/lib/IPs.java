@@ -25,7 +25,14 @@ public class IPs extends WorldData {
 	
 	@Override
 	public void writeToNBT(NBTTagCompound tCompound){
-		
+		int i = 0;
+		for(Map.Entry<Long, Location> entry : registeredIps.entrySet()){
+			NBTTagCompound entryCompound = new NBTTagCompound();
+			entryCompound.setLong("key", entry.getKey());
+			entryCompound.setIntArray("location", entry.getValue().getIntArray());
+			tCompound.setTag(i+"", entryCompound);
+			
+		}
 	}
 	
 	public boolean IPExists(long ip){
