@@ -36,6 +36,9 @@ public class IPs {
 			String p = dir.getAbsolutePath();
 			p += "/portals.json";
 			File f = new File(p);
+			if(f.exists()){
+				f.delete();
+			}
 			if(!f.exists()){
 				try {
 					f.createNewFile();

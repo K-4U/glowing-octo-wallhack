@@ -26,6 +26,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	private List<Location> frames;
 	private long ip;
 	private boolean ipRegistered = false;
+	private int colorIndex = 0;
 	
 	private ItemStack linkingCard;
 	
@@ -67,6 +68,8 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}else{
 			ipRegistered = false;
 		}
+		
+		colorIndex = tCompound.getInteger("colorIndex");
 		
 		
 		readFramesFromNBT(tCompound);
@@ -115,6 +118,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}
 		
 		tCompound.setLong("ip", ip);
+		tCompound.setInteger("colorIndex", colorIndex);
 		
 		writeFramesToNBT(tCompound);
 	}
@@ -432,6 +436,16 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		if(GlowingOctoWallHack.ipList.getLocation(linked) == null) return null;
 		Location l = new Location(GlowingOctoWallHack.ipList.getLocation(linked), portalDir, 1);
 		return l;
+	}
+
+	public void dye(int i) {
+		colorIndex = i;
+		markDirty();
+		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public int getDye(){
+		return colorIndex;
 	}
 }
 

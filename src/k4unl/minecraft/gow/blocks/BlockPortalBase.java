@@ -6,6 +6,7 @@ import k4unl.minecraft.gow.lib.config.GuiIDS;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemDye;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -35,6 +36,13 @@ public class BlockPortalBase extends GOWBlockRendering {
 		
 		if(player.getCurrentEquippedItem() != null){
 			if(player.getCurrentEquippedItem().getItem() instanceof ItemIPCard){
+				return false;
+			}
+			if(player.getCurrentEquippedItem().getItem() instanceof ItemDye){
+				//Dye that shit!
+				if(((TilePortalBase)entity).getIsValid()){
+					((TilePortalBase)entity).dye(~player.getCurrentEquippedItem().getItemDamage() & 15);
+				}
 				return false;
 			}
 		}
