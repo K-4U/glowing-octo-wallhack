@@ -36,7 +36,8 @@ public class GlowingOctoWallHack {
 	@Instance(value=ModInfo.ID)
 	public static GlowingOctoWallHack instance;
 	
-	public static IPs ipList;
+	public File configDir;
+	public static IPs ipList = new IPs();
 	
 	@SidedProxy(
 			clientSide = ModInfo.PROXY_LOCATION + ".ClientProxy",
@@ -47,7 +48,11 @@ public class GlowingOctoWallHack {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		File ConfigDir = event.getModConfigurationDirectory();
+		configDir = event.getModConfigurationDirectory();
+		String path = configDir.getPath();
+		path += "/" + ModInfo.LID + "/";
+		configDir = new File(path);
+		
 		
 		GOWBlocks.init();
 		GOWItems.init();
