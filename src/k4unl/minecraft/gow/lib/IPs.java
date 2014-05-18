@@ -8,9 +8,10 @@ import java.util.Random;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
 
+import com.google.gson.Gson;
+
 public class IPs {
 	private Random rnd;
-	private String loadedPath = "";
 	private boolean isLoaded = false;
 	private Map<Long, Location> registeredIps;
 	
@@ -21,7 +22,6 @@ public class IPs {
 	}
 	
 	public void readFromFile(File f){
-		
 		NBTTagCompound tCompound = new NBTTagCompound();
 		isLoaded = true;
 		int entries = tCompound.getInteger("entries");
@@ -33,7 +33,13 @@ public class IPs {
 		}
 	}
 	
-	public void writeToFile(NBTTagCompound tCompound){
+	public void saveToFile(File file){
+		if(file != null){
+			Gson gson = new Gson();
+			String json = gson.toJson(registeredIps);
+			Log.info("Saving: " + json);
+		}
+		/*
 		int i = 0;
 		for(Map.Entry<Long, Location> entry : registeredIps.entrySet()){
 			NBTTagCompound entryCompound = new NBTTagCompound();
@@ -42,7 +48,7 @@ public class IPs {
 			tCompound.setTag(i+"", entryCompound);
 			i++;
 		}
-		tCompound.setInteger("entries", registeredIps.size());
+		tCompound.setInteger("entries", registeredIps.size());*/
 	}
 	
 	public boolean IPExists(long ip){
@@ -98,11 +104,7 @@ public class IPs {
 	public Location getLocation(long linked) {
 		return registeredIps.get(linked);
 	}
-
-	public boolean isLoaded(File file) {
-		return loadedPath == file.getPath();
-	}
-
+	
 	public void load(File file) {
 		
 	}

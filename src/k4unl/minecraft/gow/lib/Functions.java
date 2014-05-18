@@ -8,4 +8,5 @@ public class Functions {
 	public static void showMessageInChat(EntityPlayer player, String message){
 		player.addChatMessage(new ChatComponentText(message));
 	}
+	
 }
