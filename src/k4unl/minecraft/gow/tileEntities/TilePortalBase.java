@@ -25,6 +25,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	private ForgeDirection portalDir;
 	private List<Location> frames;
 	private long ip;
+	private boolean ipRegistered = false;
 	
 	private ItemStack linkingCard;
 	
@@ -38,7 +39,8 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}
 		if(getWorldObj() != null){
 			String IP = GlowingOctoWallHack.ipList.generateNewRandomIP(getWorldObj().provider.dimensionId);
-			GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord, getWorldObj().provider.dimensionId));
+			//GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord, getWorldObj().provider.dimensionId));
+			ipRegistered = false;
 			ip = IPs.ipToLong(IP);
 			getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
@@ -63,7 +65,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		if(ip == 0){
 			genNewIP();
 		}else{
-			GlowingOctoWallHack.ipList.registerIP(ip, new Location(xCoord,yCoord,zCoord));
+			ipRegistered = false;
 		}
 		
 		
@@ -129,6 +131,10 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 					validatePortal();
 				}
 			}
+		}
+		if(!ipRegistered){
+			ipRegistered = true;
+			GlowingOctoWallHack.ipList.registerIP(ip, new Location(xCoord,yCoord,zCoord, worldObj.provider.dimensionId));
 		}
 	}
 	
