@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Random;
 
 import k4unl.minecraft.gow.lib.helperClasses.Location;
+import net.minecraft.world.World;
 
 public class IPs {
 	private Random rnd;
@@ -13,6 +14,10 @@ public class IPs {
 	public IPs(){
 		registeredIps = new HashMap<Long, Location>();
 		rnd = new Random(System.currentTimeMillis()/1000);
+	}
+	
+	public void saveList(World world){
+		
 	}
 	
 	public boolean IPExists(long ip){
