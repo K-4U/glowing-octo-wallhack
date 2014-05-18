@@ -1,6 +1,7 @@
 package k4unl.minecraft.gow.blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import k4unl.minecraft.gow.lib.TeleportHelper;
 import k4unl.minecraft.gow.lib.config.Config;
@@ -100,5 +101,36 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 				}
 			}
 		}
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void randomDisplayTick(World w, int x, int y, int z, Random rnd){
+		for (int l = 0; l < 4; ++l)
+        {
+            double d0 = (double)((float)x + rnd.nextFloat());
+            double d1 = (double)((float)y + rnd.nextFloat());
+            double d2 = (double)((float)z + rnd.nextFloat());
+            double d3 = 0.0D;
+            double d4 = 0.0D;
+            double d5 = 0.0D;
+            int i1 = rnd.nextInt(2) * 2 - 1;
+            d3 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
+            d4 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
+            d5 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
+
+            if (w.getBlock(x - 1, y, z) != this && w.getBlock(x + 1, y, z) != this)
+            {
+                d0 = (double)x + 0.5D + 0.25D * (double)i1;
+                d3 = (double)(rnd.nextFloat() * 2.0F * (float)i1);
+            }
+            else
+            {
+                d2 = (double)z + 0.5D + 0.25D * (double)i1;
+                d5 = (double)(rnd.nextFloat() * 2.0F * (float)i1);
+            }
+
+            w.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
+        }
 	}
 }

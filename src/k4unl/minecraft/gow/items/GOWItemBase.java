@@ -6,7 +6,6 @@ import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.config.ModInfo;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemNameTag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
