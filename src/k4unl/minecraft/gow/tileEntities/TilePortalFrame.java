@@ -55,7 +55,9 @@ public class TilePortalFrame extends TileGOWBase{
 	public void writeToNBT(NBTTagCompound tCompound){
 		super.writeToNBT(tCompound);
 		tCompound.setBoolean("isActive", isActive);
-		tCompound.setIntArray("parent", parentLocation.getIntArray());
+		if(parentLocation != null){
+			tCompound.setIntArray("parent", parentLocation.getIntArray());
+		}
 		tCompound.setInteger("dye",colorIndex);
 	}
 

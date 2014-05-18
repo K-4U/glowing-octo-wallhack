@@ -247,11 +247,13 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 			TileEntity te = handleLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				((TilePortalFrame)te).dye(colorIndex);
 				frames.add(handleLocation);
 			}
 			te = topLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				((TilePortalFrame)te).dye(colorIndex);
 				frames.add(topLocation);
 			}
 		}
@@ -261,11 +263,13 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 			TileEntity te = leftLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				((TilePortalFrame)te).dye(colorIndex);
 				frames.add(leftLocation);
 			}
 			te = rightLocation.getTE(getWorldObj());
 			if(te instanceof TilePortalFrame){
 				((TilePortalFrame)te).setPortalBase(this);
+				((TilePortalFrame)te).dye(colorIndex);
 				frames.add(rightLocation);
 			}
 		}
@@ -443,7 +447,13 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		markDirty();
 		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 		//Update frames
-		
+		if(portalFormed){
+			for(Location fr : frames){
+				if(fr.getTE(getWorldObj()) != null){
+					((TilePortalFrame)fr.getTE(getWorldObj())).dye(i);
+				}
+			}
+		}
 	}
 	
 	public int getDye(){

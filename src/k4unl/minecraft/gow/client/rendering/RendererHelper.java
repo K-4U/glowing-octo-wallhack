@@ -141,10 +141,7 @@ public class RendererHelper {
 		GL11.glVertex3f(vector.getXMin(), vector.getYMax(), vector.getZMax());
 	}
 	
-	public static void drawCubeWithLines(int size, boolean isActive){
-		float rF = 1.0F;
-		float gF = 1.0F;
-		float bF = 1.0F;
+	public static void drawCubeWithLines(int size, boolean isActive, float rF, float gF, float bF){
 		float minPP = RendererHelper.pixel * (size+1);
 		float minNP = RendererHelper.pixel * size;
 		float maxPP = RendererHelper.pixel * (16-(size+1));
