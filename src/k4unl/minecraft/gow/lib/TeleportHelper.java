@@ -4,6 +4,7 @@ import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
 
@@ -23,6 +24,15 @@ public class TeleportHelper {
 	}
 	
 	public static void travelToDimension(Entity ent, Location target){
+		if(ent instanceof EntityPlayerMP){
+			MinecraftServer minecraftserver = MinecraftServer.getServer();
+			WorldServer newWorldServer = minecraftserver.worldServerForDimension(target.getDimension());
+			minecraftserver.getConfigurationManager().transferPlayerToDimension((EntityPlayerMP)ent, target.getDimension(), new CustomTeleporter(newWorldServer));
+			((EntityPlayer)ent).setPositionAndUpdate(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5);
+			return;
+		}
+		
+		
 		if (!ent.worldObj.isRemote && !ent.isDead)
         {
 			ent.worldObj.theProfiler.startSection("changeDimension");
