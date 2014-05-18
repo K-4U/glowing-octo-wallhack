@@ -61,14 +61,11 @@ public class TeleportHelper {
 
                 if (j == 1 && target.getDimension() == 1)
                 {
-                	if(entity instanceof EntityPlayer){
-						((EntityPlayer)entity).setPositionAndUpdate(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5);	
-					}else{
-						entity.setLocationAndAngles(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5, entity.rotationYaw, entity.rotationPitch);
-					}
+					entity.setLocationAndAngles(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5, entity.rotationYaw, entity.rotationPitch);
                 }
 
                 worldserver1.spawnEntityInWorld(entity);
+                entity.setPosition(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5);
             }
 
             ent.isDead = true;
