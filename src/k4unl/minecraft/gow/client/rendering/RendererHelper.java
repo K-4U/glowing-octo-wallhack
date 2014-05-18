@@ -1,5 +1,6 @@
 package k4unl.minecraft.gow.client.rendering;
 
+import k4unl.minecraft.gow.lib.helperClasses.Vector2fMax;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -101,6 +102,13 @@ public class RendererHelper {
 		GL11.glVertex3f(vector.getXMax(), vector.getYMin(), vector.getZMax());
 		GL11.glVertex3f(vector.getXMax(), vector.getYMax(), vector.getZMax());
 		GL11.glVertex3f(vector.getXMin(), vector.getYMax(), vector.getZMax());
+	}
+	
+	public static void drawWhiteSquare(Vector2fMax vector){
+		GL11.glVertex2f(vector.getXMin(), vector.getYMin());
+		GL11.glVertex2f(vector.getXMax(), vector.getYMin());
+		GL11.glVertex2f(vector.getXMax(), vector.getYMax());
+		GL11.glVertex2f(vector.getXMin(), vector.getYMax());
 	}
 	
 	public static void drawWhiteCube(Vector3fMax vector){

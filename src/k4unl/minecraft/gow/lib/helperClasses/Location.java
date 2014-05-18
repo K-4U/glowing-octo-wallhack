@@ -1,6 +1,5 @@
 package k4unl.minecraft.gow.lib.helperClasses;
 
-import k4unl.minecraft.gow.lib.Log;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
