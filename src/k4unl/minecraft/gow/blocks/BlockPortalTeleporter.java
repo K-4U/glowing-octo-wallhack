@@ -86,9 +86,9 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
 				if(teleportLocation != null){
 					if(entity instanceof EntityPlayer){
-						((EntityPlayer)entity).setPositionAndUpdate(teleportLocation.getX(), teleportLocation.getY(), teleportLocation.getZ());	
+						((EntityPlayer)entity).setPositionAndUpdate(teleportLocation.getX()+0.5, teleportLocation.getY()+0.5, teleportLocation.getZ()+0.5);	
 					}else{
-						entity.setLocationAndAngles(teleportLocation.getX(), teleportLocation.getY()+1, teleportLocation.getZ(), entity.rotationYaw, entity.rotationPitch);
+						entity.setLocationAndAngles(teleportLocation.getX()+0.5, teleportLocation.getY()+0.5, teleportLocation.getZ()+0.5, entity.rotationYaw, entity.rotationPitch);
 					}
 					entCompound.setLong("lastInPortal" + teleporter.getPortalBase().getIPLong(), world.getTotalWorldTime());
 				}

@@ -28,6 +28,8 @@ public class RendererPortalTeleporter extends TileEntitySpecialRenderer {
 		
 		renderTeleporter(myTeleporter, frame);
 		
+		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
 		

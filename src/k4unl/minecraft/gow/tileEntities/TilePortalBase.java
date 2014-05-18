@@ -39,7 +39,9 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
 		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord));
 		ip = IPs.ipToLong(IP);
-		getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+		if(getWorldObj() != null){
+			getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
+		}
 	}
 	
 	@Override
