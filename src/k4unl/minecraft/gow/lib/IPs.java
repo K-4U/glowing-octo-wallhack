@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -29,7 +28,7 @@ public class IPs {
 	}
 	
 	public void readFromFile(File dir){
-		registeredIps.clear();
+		//registeredIps.clear();
 		if(dir != null){
 			Gson gson = new Gson();
 			String p = dir.getAbsolutePath();
@@ -51,6 +50,12 @@ public class IPs {
 				reader.close();
 				ipStream.close();
 				bReader.close();
+				
+				registeredIps = gson.fromJson(json, Map.class);
+				if(registeredIps == null){
+					registeredIps = new HashMap<Long, Location>();
+				}
+				
 				Log.info("Read from file: " + json);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();

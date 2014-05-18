@@ -74,7 +74,7 @@ public class GlowingOctoWallHack {
 	
 	@EventHandler
 	public void serverStart(FMLServerStartingEvent event){
-		GlowingOctoWallHack.ipList.load(DimensionManager.getCurrentSaveRootDirectory());
+		GlowingOctoWallHack.ipList.readFromFile(DimensionManager.getCurrentSaveRootDirectory());
 	}
 	
 	@EventHandler
