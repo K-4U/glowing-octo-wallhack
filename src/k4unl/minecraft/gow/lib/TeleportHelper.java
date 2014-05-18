@@ -12,7 +12,7 @@ public class TeleportHelper {
 	
 	public static void teleportEntity(Entity ent, Location target){
 		if(ent.dimension != target.getDimension()){
-			//travelToDimension(ent, target);
+			travelToDimension(ent, target);
 		}else{
 			if(ent instanceof EntityPlayer){
 				((EntityPlayer)ent).setPositionAndUpdate(target.getX()+0.5, target.getY()+0.5, target.getZ()+0.5);	

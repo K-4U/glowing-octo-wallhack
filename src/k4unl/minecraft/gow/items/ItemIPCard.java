@@ -1,5 +1,8 @@
 package k4unl.minecraft.gow.items;
 
+import java.util.List;
+
+import k4unl.minecraft.gow.GlowingOctoWallHack;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,6 +51,20 @@ public class ItemIPCard extends GOWItemBase {
 		}
         return itemStack;
     }
+	
+	@Override
+	public void addInformation(ItemStack itemStack, EntityPlayer player, List list, boolean par4){
+		super.addInformation(itemStack, player, list, par4);
+		if(itemStack.getTagCompound() != null){
+			if(itemStack.getTagCompound().getLong("linked") != 0){
+				if(GlowingOctoWallHack.ipList.getLocation(itemStack.getTagCompound().getLong("linked")) != null){
+					list.add(GlowingOctoWallHack.ipList.getLocation(itemStack.getTagCompound().getLong("linked")).print());
+				}else{
+					list.add("Invalid target location");
+				}
+			}
+		}
+	}
 
 
 }
