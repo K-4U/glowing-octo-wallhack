@@ -8,6 +8,8 @@ import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
+import k4unl.minecraft.gow.network.PacketPipeline;
+import k4unl.minecraft.gow.network.packets.PacketSpawnParticle;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
@@ -88,15 +90,16 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 				if(teleportLocation != null){
 					TeleportHelper.teleportEntity(entity, teleportLocation);
 					Random rnd = new Random(System.currentTimeMillis()/1000);
-					double d3 = 0.0D;
-		            double d4 = 0.0D;
-		            double d5 = 0.0D;
+					double dx = 0.0D;
+		            double dy = 0.0D;
+		            double dz = 0.0D;
 		            for(int i = 0; i <= 5; i++){
-			            d3 = (rnd.nextFloat() - 0.6D) * 0.1D;
-			            d4 = (rnd.nextFloat() - 0.6D) * 0.1D;
-			            d5 = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            dx = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            dy = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            dz = (rnd.nextFloat() - 0.6D) * 0.1D;
 			            
-			            world.spawnParticle("cloud", x, y, z, d3, d4, d5);
+			            //world.spawnParticle("cloud", x, y, z, d3, d4, d5);
+			            PacketPipeline.instance.sendToAllAround(new PacketSpawnParticle("cloud", x, y, z, dx, dy, dz), world);
 		            }
 					/*if(teleportLocation.getDimension() != world.provider.dimensionId){
 						
