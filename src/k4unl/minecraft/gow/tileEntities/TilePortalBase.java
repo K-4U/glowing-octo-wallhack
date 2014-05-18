@@ -14,6 +14,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class TilePortalBase extends TileGOWBase implements IInventory {
@@ -465,5 +467,6 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	public Location getBlockLocation() {
 		return new Location(xCoord, yCoord, zCoord);
 	}
+
 }
 

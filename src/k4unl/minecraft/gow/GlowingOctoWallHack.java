@@ -48,10 +48,10 @@ public class GlowingOctoWallHack {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
 		Log.init();
+		CustomTabs.init();
 		GOWBlocks.init();
 		GOWItems.init();
 		TileEntities.init();
-		CustomTabs.init();
 		Recipes.init();
 	}
 	

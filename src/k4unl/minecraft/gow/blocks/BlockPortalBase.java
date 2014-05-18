@@ -2,6 +2,7 @@ package k4unl.minecraft.gow.blocks;
 
 import k4unl.minecraft.gow.GlowingOctoWallHack;
 import k4unl.minecraft.gow.items.ItemIPCard;
+import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.config.GuiIDS;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
@@ -14,7 +15,7 @@ public class BlockPortalBase extends GOWBlockRendering {
 
 	protected BlockPortalBase() {
 		super(Names.portalBase);
-		
+		setCreativeTab(CustomTabs.tabGOW);
 	}
 
 	@Override

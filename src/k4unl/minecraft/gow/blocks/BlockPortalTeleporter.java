@@ -12,9 +12,11 @@ import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.network.packets.PacketSpawnParticle;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -137,4 +139,10 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 		}
         //}
 	}
+	
+	
+	@Override
+	public ItemStack getPickBlock(MovingObjectPosition target, World world, int x, int y, int z){
+		return null;
+    }
 }

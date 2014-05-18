@@ -2,6 +2,7 @@ package k4unl.minecraft.gow.blocks;
 
 import java.util.List;
 
+import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalFrame;
@@ -17,6 +18,7 @@ public class BlockPortalFrame extends GOWBlockRendering {
 	
 	protected BlockPortalFrame() {
 		super(Names.portalFrame);
+		setCreativeTab(CustomTabs.tabGOW);
 	}
 
 	@Override
