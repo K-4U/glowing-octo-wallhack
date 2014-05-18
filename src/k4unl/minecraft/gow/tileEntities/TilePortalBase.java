@@ -422,6 +422,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		if(linkingCard.getTagCompound() == null) return null;
 		if(linkingCard.getTagCompound().getLong("linked") == 0) return null;
 		long linked = linkingCard.getTagCompound().getLong("linked");
+		if(GlowingOctoWallHack.ipList.getLocation(linked) == null) return null;
 		Location l = new Location(GlowingOctoWallHack.ipList.getLocation(linked), portalDir, 1);
 		return l;
 	}

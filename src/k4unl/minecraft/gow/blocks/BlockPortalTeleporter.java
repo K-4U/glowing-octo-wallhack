@@ -88,7 +88,6 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 					if(teleportLocation.getDimension() != world.provider.dimensionId){
 						
 					}else{
-						
 						if(entity instanceof EntityPlayer){
 							((EntityPlayer)entity).setPositionAndUpdate(teleportLocation.getX()+0.5, teleportLocation.getY()+0.5, teleportLocation.getZ()+0.5);	
 						}else{
