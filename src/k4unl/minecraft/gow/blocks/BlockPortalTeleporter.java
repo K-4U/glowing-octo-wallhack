@@ -87,6 +87,17 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
 				if(teleportLocation != null){
 					TeleportHelper.teleportEntity(entity, teleportLocation);
+					Random rnd = new Random(System.currentTimeMillis()/1000);
+					double d3 = 0.0D;
+		            double d4 = 0.0D;
+		            double d5 = 0.0D;
+		            for(int i = 0; i <= 5; i++){
+			            d3 = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            d4 = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            d5 = (rnd.nextFloat() - 0.6D) * 0.1D;
+			            
+			            world.spawnParticle("cloud", x, y, z, d3, d4, d5);
+		            }
 					/*if(teleportLocation.getDimension() != world.provider.dimensionId){
 						
 					}else{
@@ -109,16 +120,15 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 		/*for (int l = 0; l < 1; ++l)
         {*/
 		if(rnd.nextInt(100) <= 50){
-            double d0 = (double)((float)x + rnd.nextFloat());
-            double d1 = (double)((float)y + rnd.nextFloat());
-            double d2 = (double)((float)z + rnd.nextFloat());
+            double d0 = x + rnd.nextFloat();
+            double d1 = y + rnd.nextFloat();
+            double d2 = z + rnd.nextFloat();
             double d3 = 0.0D;
             double d4 = 0.0D;
             double d5 = 0.0D;
-            int i1 = rnd.nextInt(2) * 2 - 1;
-            d3 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
-            d4 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
-            d5 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
+            d3 = (rnd.nextFloat() - 0.6D) * 0.1D;
+            d4 = (rnd.nextFloat() - 0.6D) * 0.1D;
+            d5 = (rnd.nextFloat() - 0.6D) * 0.1D;
 
             w.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
 		}
