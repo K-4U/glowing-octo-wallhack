@@ -128,7 +128,7 @@ public class Location {
 	}
 
 	public String print() {
-		return String.format("D: " + dimension + "\tX: " + x + "\tY: " + y + "\tZ: " + z);
+		return String.format("D: " + dimension + " X: " + x + " Y: " + y + " Z: " + z);
 	}
 	
 	public int[] getIntArray(){

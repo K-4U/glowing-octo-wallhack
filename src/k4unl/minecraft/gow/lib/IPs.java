@@ -28,7 +28,7 @@ public class IPs {
 	}
 	
 	public void readFromFile(File dir){
-		//registeredIps.clear();
+		registeredIps.clear();
 		if(dir != null){
 			Gson gson = new Gson();
 			String p = dir.getAbsolutePath();

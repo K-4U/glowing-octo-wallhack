@@ -38,7 +38,7 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		}
 		if(getWorldObj() != null){
 			String IP = GlowingOctoWallHack.ipList.generateNewRandomIP(getWorldObj().provider.dimensionId);
-			GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord));
+			GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord, getWorldObj().provider.dimensionId));
 			ip = IPs.ipToLong(IP);
 			getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
@@ -68,7 +68,6 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		
 		
 		readFramesFromNBT(tCompound);
-		
 	}
 	
 	private void readFramesFromNBT(NBTTagCompound tCompound){
