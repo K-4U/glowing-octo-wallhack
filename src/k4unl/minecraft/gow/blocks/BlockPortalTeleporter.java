@@ -106,8 +106,9 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void randomDisplayTick(World w, int x, int y, int z, Random rnd){
-		for (int l = 0; l < 4; ++l)
-        {
+		/*for (int l = 0; l < 1; ++l)
+        {*/
+		if(rnd.nextInt(100) <= 50){
             double d0 = (double)((float)x + rnd.nextFloat());
             double d1 = (double)((float)y + rnd.nextFloat());
             double d2 = (double)((float)z + rnd.nextFloat());
@@ -115,22 +116,12 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
             double d4 = 0.0D;
             double d5 = 0.0D;
             int i1 = rnd.nextInt(2) * 2 - 1;
-            d3 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
-            d4 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
-            d5 = ((double)rnd.nextFloat() - 0.5D) * 0.5D;
-
-            if (w.getBlock(x - 1, y, z) != this && w.getBlock(x + 1, y, z) != this)
-            {
-                d0 = (double)x + 0.5D + 0.25D * (double)i1;
-                d3 = (double)(rnd.nextFloat() * 2.0F * (float)i1);
-            }
-            else
-            {
-                d2 = (double)z + 0.5D + 0.25D * (double)i1;
-                d5 = (double)(rnd.nextFloat() * 2.0F * (float)i1);
-            }
+            d3 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
+            d4 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
+            d5 = ((double)rnd.nextFloat() - 0.6D) * 0.1D;
 
             w.spawnParticle("portal", d0, d1, d2, d3, d4, d5);
-        }
+		}
+        //}
 	}
 }
