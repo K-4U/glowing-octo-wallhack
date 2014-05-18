@@ -33,7 +33,7 @@ public class Location {
 				dimension = loc[3];
 			}
 		}else{
-			Log.error("Trying to load a location with a wrong int array!");
+			//Log.error("Trying to load a location with a wrong int array!");
 		}
 	}
 	
