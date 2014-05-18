@@ -315,7 +315,9 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 			}
 			for(Location fr : frames){
 				if(fr.getTE(getWorldObj()) != null){
-					((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
+					if(fr.getTE(getWorldObj()) instanceof TilePortalFrame){
+						((TilePortalFrame)fr.getTE(getWorldObj())).setActive(true);
+					}
 				}
 			}
 		}
