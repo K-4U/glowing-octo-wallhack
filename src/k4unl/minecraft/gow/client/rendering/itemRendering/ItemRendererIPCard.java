@@ -1,7 +1,7 @@
 package k4unl.minecraft.gow.client.rendering.itemRendering;
 
 import k4unl.minecraft.gow.client.rendering.RendererHelper;
-import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
+import k4unl.minecraft.gow.lib.helperClasses.Vector2fMax;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -43,22 +43,24 @@ public class ItemRendererIPCard implements IItemRenderer{
 	}
 	
 	private void render(float x, float y, float z, float scale){
-		
 		GL11.glScalef(scale, scale, scale);
-		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
+		GL11.glPushMatrix();
+		
+		GL11.glRotatef(45.0F, 0.0F, 1.0F, 0.0F);
 		
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_TEXTURE_2D);
 		GL11.glDisable(GL11.GL_LIGHTING);
-		
+		GL11.glDepthMask(false);
 		GL11.glBegin(GL11.GL_QUADS);
 		
-		RendererHelper.drawWhiteCube(new Vector3fMax(0.0F,0.0F,0.0F,1.0F,1.0F,1.0F));
+		RendererHelper.drawWhiteSquare(new Vector2fMax(0.0F, 0.0F, 1.0F, 1.0F));
 		
 		GL11.glEnd();
 		
 		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GL11.glDepthMask(true);
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
