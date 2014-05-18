@@ -17,12 +17,12 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.0.1"
+version = "0.1.0"
 group= "k4unl.minecraft.gow" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "gow"
 
 minecraft {
-    version = "1.7.2-10.12.1.1065"
+    version = "1.7.2-10.12.1.1082"
     assetDir = "minecraft/assets"
 }
 
