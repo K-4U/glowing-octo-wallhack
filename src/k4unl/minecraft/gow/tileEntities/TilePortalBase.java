@@ -293,14 +293,16 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 	@Override
 	protected void redstoneChanged(){
 		if(getWorldObj() != null){
-			if(portalEnabled && !isRedstonePowered){
-				portalEnabled = false;
-				disablePortal();
-			}else if(isRedstonePowered){
-				portalEnabled = true;
-				enablePortal();
+			if(portalFormed && linkingCard != null){
+				if(portalEnabled && !isRedstonePowered){
+					portalEnabled = false;
+					disablePortal();
+				}else if(isRedstonePowered){
+					portalEnabled = true;
+					enablePortal();
+				}
+				markDirty();
 			}
-			markDirty();
 		}
 		
 	}

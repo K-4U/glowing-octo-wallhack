@@ -1,5 +1,6 @@
 package k4unl.minecraft.gow.tileEntities;
 
+import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.network.packets.PacketPortalEnabled;
@@ -93,5 +94,9 @@ public class TilePortalTeleporter extends TileGOWBase {
 	@Override
 	public boolean shouldRenderInPass(int pass){
 		return true;
+	}
+
+	public boolean isEdge(ForgeDirection dir) {
+		return (new Location(xCoord, yCoord, zCoord, dir).getBlock(getWorldObj()) == GOWBlocks.portalFrame);
 	}
 }
