@@ -33,6 +33,18 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
+	public boolean canRenderInPass(int pass){
+		return true;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getRenderBlockPass(){
+		return 1;
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess iba, int x, int y, int z){
 		TileEntity ent = iba.getTileEntity(x, y, z);
 		
@@ -71,8 +83,6 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			TilePortalTeleporter teleporter = (TilePortalTeleporter)teLocation.getTE(world);
 			Location teleportLocation = teleporter.getPortalBase().getTarget();
 			long lastInPortal = entCompound.getLong("lastInPortal" + teleporter.getPortalBase().getIPLong());
-			long minus = world.getTotalWorldTime() - lastInPortal;
-			//Log.info("Time between jumps: " + minus + " Config: " + (Config.getInt("portalTimeoutInSeconds") * 20));
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
 				if(teleportLocation != null){
 					if(entity instanceof EntityPlayer){
