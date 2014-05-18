@@ -7,7 +7,7 @@ import net.minecraft.world.storage.MapStorage;
 
 public class WorldData extends WorldSavedData {
 
-	public final static String key = "gow.portals";
+public final static String key = "gow.portals";
 	
 	public static WorldData forWorld(World world){
 		MapStorage storage = world.perWorldStorage;

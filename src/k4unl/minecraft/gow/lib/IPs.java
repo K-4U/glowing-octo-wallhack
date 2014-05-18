@@ -6,13 +6,29 @@ import java.util.Random;
 
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
+import net.minecraft.world.WorldSavedData;
+import net.minecraft.world.storage.MapStorage;
 
-public class IPs extends WorldData {
+public class IPs extends WorldSavedData {
 	private Random rnd;
 	private boolean isLoaded = false;
 	private Map<Long, Location> registeredIps;
 	
+	public final static String key = "gow.portals";
+	
+	public static IPs forWorld(World world){
+		MapStorage storage = world.perWorldStorage;
+		IPs result = (IPs)storage.loadData(WorldData.class, key);
+		if(result == null){
+			result = new IPs();
+			storage.setData(key, result);
+		}
+		return result;
+	}
+	
 	public IPs(){
+		super(key);
 		registeredIps = new HashMap<Long, Location>();
 		rnd = new Random(System.currentTimeMillis()/1000);
 	}
@@ -31,8 +47,8 @@ public class IPs extends WorldData {
 			entryCompound.setLong("key", entry.getKey());
 			entryCompound.setIntArray("location", entry.getValue().getIntArray());
 			tCompound.setTag(i+"", entryCompound);
-			
 		}
+		tCompound.setInteger("entries", registeredIps.size());
 	}
 	
 	public boolean IPExists(long ip){

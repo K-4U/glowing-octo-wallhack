@@ -2,6 +2,7 @@ package k4unl.minecraft.gow;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.client.gui.GuiHandler;
+import k4unl.minecraft.gow.events.EventHelper;
 import k4unl.minecraft.gow.items.GOWItems;
 import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.IPs;
@@ -59,6 +60,7 @@ public class GlowingOctoWallHack {
 		proxy.initRenderers();
 		proxy.initSounds();
 		
+		EventHelper.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(this.instance, new GuiHandler());
 	}
 	
