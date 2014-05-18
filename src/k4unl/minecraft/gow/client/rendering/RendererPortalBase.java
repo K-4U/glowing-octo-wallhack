@@ -43,11 +43,106 @@ public class RendererPortalBase extends TileEntitySpecialRenderer {
 		float colorFrameR = 1.0F;
 		float colorFrameG = 0.0F;
 		float colorFrameB = 0.0F;
+		float colorFaceR = 255.0F;
+		float colorFaceG = 255.0F;
+		float colorFaceB = 255.0F;
+		int color = base.getDye();
+		
+		switch(color){
+		case 0:
+			colorFaceR = 221.0F;
+			colorFaceG = 221.0F;
+			colorFaceB = 221.0F;
+			break;
+		case 1:
+			colorFaceR = 219.0F;
+			colorFaceG = 125.0F;
+			colorFaceB = 62.0F;
+			break;
+		case 2:
+			colorFaceR = 179.0F;
+			colorFaceG = 80.0F;
+			colorFaceB = 188.0F;
+			break;
+		case 3:
+			colorFaceR = 107.0F;
+			colorFaceG = 138.0F;
+			colorFaceB = 1201.0F;
+			break;
+		case 4:
+			colorFaceR = 177.0F;
+			colorFaceG = 166.0F;
+			colorFaceB = 39.0F;
+			break;
+		case 5:
+			colorFaceR = 65.0F;
+			colorFaceG = 174.0F;
+			colorFaceB = 56.0F;
+			break;
+		case 6:
+			colorFaceR = 208.0F;
+			colorFaceG = 132.0F;
+			colorFaceB = 153.0F;
+			break;
+		case 7:
+			colorFaceR = 64.0F;
+			colorFaceG = 64.0F;
+			colorFaceB = 64.0F;
+			break;
+		case 8:
+			colorFaceR = 154.0F;
+			colorFaceG = 161.0F;
+			colorFaceB = 161.0F;
+			break;
+		case 9:
+			colorFaceR = 46.0F;
+			colorFaceG = 110.0F;
+			colorFaceB = 137.0F;
+			break;
+		case 10:
+			colorFaceR = 126.0F;
+			colorFaceG = 61.0F;
+			colorFaceB = 181.0F;
+			break;
+		case 11:
+			colorFaceR = 46.0F;
+			colorFaceG = 56.0F;
+			colorFaceB = 141.0F;
+			break;
+		case 12:
+			colorFaceR = 79.0F;
+			colorFaceG = 50.0F;
+			colorFaceB = 31.0F;
+			break;
+		case 13:
+			colorFaceR = 53.0F;
+			colorFaceG = 70.0F;
+			colorFaceB = 27.0F;
+			break;
+		case 14:
+			colorFaceR = 0.0F;
+			colorFaceG = 0.0F;
+			colorFaceB = 0.0F;
+			break;
+		case 15:
+			colorFaceR = 255.0F;
+			colorFaceG = 255.0F;
+			colorFaceB = 255.0F;
+			default:
+				break;
+		}
+		
+		colorFaceR = colorFaceR / 255.0F;
+		colorFaceG = colorFaceG / 255.0F;
+		colorFaceB = colorFaceB / 255.0F;
+		
 		if(base.getIsActive()){
 			colorFrameR = 0.0F;
 			colorFrameG = 1.0F;
 		}
+		
 		GL11.glBegin(GL11.GL_QUADS);
+		GL11.glColor3f(colorFaceR, colorFaceG, colorFaceB);
 		Vector3fMax pane = new Vector3fMax(0.0F+RendererHelper.pixel, 0.0F, 0.0F+RendererHelper.pixel, 1.0F-RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel);
 		Vector3fMax paneSideEW = new Vector3fMax(0.0F, 0.0F+RendererHelper.pixel, 0.0F+RendererHelper.pixel, 1.0F, 1.0F-RendererHelper.pixel, 1.0F-RendererHelper.pixel);
 		Vector3fMax paneSideNS = new Vector3fMax(0.0F+RendererHelper.pixel, 0.0F+RendererHelper.pixel, 0.0F, 1.0F-RendererHelper.pixel, 1.0F-RendererHelper.pixel, 1.0F);
