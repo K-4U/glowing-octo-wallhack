@@ -2,6 +2,7 @@ package k4unl.minecraft.gow;
 
 import java.io.File;
 
+import net.minecraftforge.common.DimensionManager;
 import k4unl.minecraft.gow.blocks.GOWBlocks;
 import k4unl.minecraft.gow.client.gui.GuiHandler;
 import k4unl.minecraft.gow.events.EventHelper;
@@ -21,6 +22,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 
 
@@ -36,7 +38,6 @@ public class GlowingOctoWallHack {
 	@Instance(value=ModInfo.ID)
 	public static GlowingOctoWallHack instance;
 	
-	public File configDir;
 	public static IPs ipList = new IPs();
 	
 	@SidedProxy(
@@ -47,13 +48,6 @@ public class GlowingOctoWallHack {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		configDir = event.getModConfigurationDirectory();
-		String path = configDir.getPath();
-		path += "/" + ModInfo.LID + "/";
-		configDir = new File(path);
-		
-		
 		GOWBlocks.init();
 		GOWItems.init();
 		TileEntities.init();
@@ -78,6 +72,11 @@ public class GlowingOctoWallHack {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event){
 		
+	}
+	
+	@EventHandler
+	public void serverStart(FMLServerStartingEvent event){
+		GlowingOctoWallHack.ipList.load(DimensionManager.getCurrentSaveRootDirectory());
 	}
 	
 }

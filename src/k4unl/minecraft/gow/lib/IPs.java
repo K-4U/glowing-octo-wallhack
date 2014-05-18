@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class IPs {
 	private Random rnd;
+	private String loadedPath = "";
 	private boolean isLoaded = false;
 	private Map<Long, Location> registeredIps;
 	
@@ -96,5 +97,13 @@ public class IPs {
 
 	public Location getLocation(long linked) {
 		return registeredIps.get(linked);
+	}
+
+	public boolean isLoaded(File file) {
+		return loadedPath == file.getPath();
+	}
+
+	public void load(File file) {
+		
 	}
 }
