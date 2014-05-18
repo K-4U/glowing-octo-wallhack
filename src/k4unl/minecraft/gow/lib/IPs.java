@@ -5,10 +5,11 @@ import java.util.Map;
 import java.util.Random;
 
 import k4unl.minecraft.gow.lib.helperClasses.Location;
-import net.minecraft.world.World;
+import net.minecraft.nbt.NBTTagCompound;
 
-public class IPs {
+public class IPs extends WorldData {
 	private Random rnd;
+	private boolean isLoaded = false;
 	private Map<Long, Location> registeredIps;
 	
 	public IPs(){
@@ -16,7 +17,14 @@ public class IPs {
 		rnd = new Random(System.currentTimeMillis()/1000);
 	}
 	
-	public void saveList(World world){
+	@Override
+	public void readFromNBT(NBTTagCompound tCompound){
+		isLoaded = true;
+		
+	}
+	
+	@Override
+	public void writeToNBT(NBTTagCompound tCompound){
 		
 	}
 	
