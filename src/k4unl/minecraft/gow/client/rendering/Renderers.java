@@ -1,10 +1,8 @@
 package k4unl.minecraft.gow.client.rendering;
 
 import k4unl.minecraft.gow.blocks.GOWBlocks;
-import k4unl.minecraft.gow.client.rendering.itemRendering.ItemRendererIPCard;
 import k4unl.minecraft.gow.client.rendering.itemRendering.ItemRendererPortalBase;
 import k4unl.minecraft.gow.client.rendering.itemRendering.ItemRendererPortalFrame;
-import k4unl.minecraft.gow.items.GOWItems;
 import k4unl.minecraft.gow.tileEntities.TilePortalBase;
 import k4unl.minecraft.gow.tileEntities.TilePortalFrame;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
@@ -20,6 +18,5 @@ public class Renderers {
 		
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GOWBlocks.portalBase), new ItemRendererPortalBase());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GOWBlocks.portalFrame), new ItemRendererPortalFrame());
-		MinecraftForgeClient.registerItemRenderer(GOWItems.itemIPCard, new ItemRendererIPCard());
 	}
 }
