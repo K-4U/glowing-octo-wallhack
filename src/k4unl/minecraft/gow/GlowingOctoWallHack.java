@@ -7,6 +7,7 @@ import k4unl.minecraft.gow.items.GOWItems;
 import k4unl.minecraft.gow.lib.CustomTabs;
 import k4unl.minecraft.gow.lib.IPs;
 import k4unl.minecraft.gow.lib.Log;
+import k4unl.minecraft.gow.lib.Recipes;
 import k4unl.minecraft.gow.lib.config.ModInfo;
 import k4unl.minecraft.gow.network.PacketPipeline;
 import k4unl.minecraft.gow.proxy.CommonProxy;
@@ -46,11 +47,12 @@ public class GlowingOctoWallHack {
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event){
+		Log.init();
 		GOWBlocks.init();
 		GOWItems.init();
 		TileEntities.init();
 		CustomTabs.init();
-		Log.init();
+		Recipes.init();
 	}
 	
 	@EventHandler

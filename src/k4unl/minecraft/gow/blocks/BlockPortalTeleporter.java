@@ -99,7 +99,7 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			            dz = (rnd.nextFloat() - 0.6D) * 0.1D;
 			            
 			            //world.spawnParticle("cloud", x, y, z, d3, d4, d5);
-			            PacketPipeline.instance.sendToAllAround(new PacketSpawnParticle("cloud", x, y, z, dx, dy, dz), world);
+			            PacketPipeline.instance.sendToAllAround(new PacketSpawnParticle("cloud", x+.5, y+.5, z+.5, dx, dy, dz), world);
 		            }
 					/*if(teleportLocation.getDimension() != world.provider.dimensionId){
 						
