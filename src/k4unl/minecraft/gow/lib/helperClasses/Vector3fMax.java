@@ -70,5 +70,9 @@ public class Vector3fMax {
 	public void setZMax(float _z){
 		zMax = _z;
 	}
+
+	public Vector3fMax copy() {
+		return new Vector3fMax(xMin, yMin, zMin, xMax, yMax, zMax);
+	}
 }
 
