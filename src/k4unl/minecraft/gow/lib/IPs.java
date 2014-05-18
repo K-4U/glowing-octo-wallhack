@@ -57,10 +57,12 @@ public class IPs extends WorldSavedData {
 	
 	public void registerIP(long ip, Location loc){
 		registeredIps.put(ip, loc);
+		markDirty();
 	}
 	
 	public void removeIP(long ip){
 		registeredIps.remove(ip);
+		markDirty();
 	}
 	
 	public String generateNewRandomIP(int dimensionID){

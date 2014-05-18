@@ -2,13 +2,13 @@ package k4unl.minecraft.gow.blocks;
 
 import java.util.List;
 
+import k4unl.minecraft.gow.lib.TeleportHelper;
 import k4unl.minecraft.gow.lib.config.Config;
 import k4unl.minecraft.gow.lib.config.Names;
 import k4unl.minecraft.gow.lib.helperClasses.Location;
 import k4unl.minecraft.gow.lib.helperClasses.Vector3fMax;
 import k4unl.minecraft.gow.tileEntities.TilePortalTeleporter;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
@@ -85,7 +85,8 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 			long lastInPortal = entCompound.getLong("lastInPortal" + teleporter.getPortalBase().getIPLong());
 			if(world.getTotalWorldTime() - lastInPortal > (Config.getInt("portalTimeoutInSeconds") * 20)){
 				if(teleportLocation != null){
-					if(teleportLocation.getDimension() != world.provider.dimensionId){
+					TeleportHelper.teleportEntity(entity, teleportLocation);
+					/*if(teleportLocation.getDimension() != world.provider.dimensionId){
 						
 					}else{
 						if(entity instanceof EntityPlayer){
@@ -93,7 +94,7 @@ public class BlockPortalTeleporter extends GOWBlockRendering {
 						}else{
 							entity.setLocationAndAngles(teleportLocation.getX()+0.5, teleportLocation.getY()+0.5, teleportLocation.getZ()+0.5, entity.rotationYaw, entity.rotationPitch);
 						}
-					}
+					}*/
 					
 					entCompound.setLong("lastInPortal" + teleporter.getPortalBase().getIPLong(), world.getTotalWorldTime());
 				}
