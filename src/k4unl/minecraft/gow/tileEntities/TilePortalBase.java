@@ -36,10 +36,10 @@ public class TilePortalBase extends TileGOWBase implements IInventory {
 		if(ip != 0){
 			GlowingOctoWallHack.ipList.removeIP(ip);
 		}
-		String IP = GlowingOctoWallHack.ipList.generateNewRandomIP();
-		GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord));
-		ip = IPs.ipToLong(IP);
 		if(getWorldObj() != null){
+			String IP = GlowingOctoWallHack.ipList.generateNewRandomIP(getWorldObj().provider.dimensionId);
+			GlowingOctoWallHack.ipList.registerIP(IPs.ipToLong(IP), new Location(xCoord, yCoord, zCoord));
+			ip = IPs.ipToLong(IP);
 			getWorldObj().markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 	}

@@ -27,8 +27,8 @@ public class IPs {
 		registeredIps.remove(ip);
 	}
 	
-	public String generateNewRandomIP(){
-		String[] IP = {"10", "230", "0", "0"};
+	public String generateNewRandomIP(int dimensionID){
+		String[] IP = {"10", (dimensionID + 2) + "", "0", "0"};
 		String fullIP = "";
 		boolean redo = true;
 		while(redo){

@@ -10,11 +10,18 @@ public class Location {
 	private int x;
 	private int y;
 	private int z;
+	private int dimension;
 	
 	public Location(int _x, int _y, int _z){
 		x = _x;
 		y = _y;
 		z = _z;
+	}
+	public Location(int _x, int _y, int _z, int _dimension){
+		x = _x;
+		y = _y;
+		z = _z;
+		dimension = _dimension;
 	}
 	
 	public Location(int[] loc){
@@ -22,6 +29,9 @@ public class Location {
 			x = loc[0];
 			y = loc[1];
 			z = loc[2];
+			if(loc.length > 3){
+				dimension = loc[3];
+			}
 		}else{
 			Log.error("Trying to load a location with a wrong int array!");
 		}
@@ -33,16 +43,30 @@ public class Location {
 		z = _z + (d.offsetZ * offset);
 	}
 	
+	public Location(int _x, int _y, int _z, int _dimension, ForgeDirection d, int offset){
+		x = _x + (d.offsetX * offset);
+		y = _y + (d.offsetY * offset);
+		z = _z + (d.offsetZ * offset);
+		dimension = _dimension;
+	}
+	
 	public Location(Location baseLoc, ForgeDirection d, int offset){
 		x = baseLoc.getX() + (d.offsetX * offset);
 		y = baseLoc.getY() + (d.offsetY * offset);
 		z = baseLoc.getZ() + (d.offsetZ * offset);
+		dimension = baseLoc.dimension;
 	}
 	
 	public Location(int _x, int _y, int _z, ForgeDirection d) {
 		x = _x + d.offsetX;
 		y = _y + d.offsetY;
 		z = _z + d.offsetZ;
+	}
+	public Location(int _x, int _y, int _z, int _dimension, ForgeDirection d) {
+		x = _x + d.offsetX;
+		y = _y + d.offsetY;
+		z = _z + d.offsetZ;
+		dimension = _dimension;
 	}
 
 	public Block getBlock(IBlockAccess iba){
@@ -70,6 +94,9 @@ public class Location {
 	public void setZ(int newZ){
 		z = newZ;
 	}
+	public void setDimension(int newDimension){
+		dimension = newDimension;
+	}
 	
 	public int getX(){
 		return x;
@@ -79,6 +106,9 @@ public class Location {
 	}
 	public int getZ(){
 		return z;
+	}
+	public int getDimension(){
+		return dimension;
 	}
 	
 	public void addX(int toAdd){
@@ -98,10 +128,10 @@ public class Location {
 	}
 
 	public String print() {
-		return String.format("X: " + x + "\tY: " + y + "\tZ: " + z);
+		return String.format("D: " + dimension + "\tX: " + x + "\tY: " + y + "\tZ: " + z);
 	}
 	
 	public int[] getIntArray(){
-		return new int[] {x, y, z};
+		return new int[] {x, y, z, dimension};
 	}
 }
