@@ -1,4 +1,4 @@
 glowing-octo-wallhack
 =====================
 
-Teleportation? Definately yes!
+Teleportation? Definitely yes!
